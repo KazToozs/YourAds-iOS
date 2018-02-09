@@ -1,0 +1,16 @@
+PODS:
+  - YourAdsSDK (0.0.1)
+
+DEPENDENCIES:
+  - YourAdsSDK (from `../SDKtest/YourAdsSDK/`)
+
+EXTERNAL SOURCES:
+  YourAdsSDK:
+    :path: ../SDKtest/YourAdsSDK/
+
+SPEC CHECKSUMS:
+  YourAdsSDK: b7b8d360c2832515f579ece529a610d9c1721d6d
+
+PODFILE CHECKSUM: ac0692a09d206cca9560aaca58dc222c03953048
+
+COCOAPODS: 1.3.1
