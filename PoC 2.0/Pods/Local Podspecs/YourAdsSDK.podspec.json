@@ -8,8 +8,11 @@
   "authors": {
     "Cris Toozs": "cris.hobson@hotmail.com"
   },
+  "platforms": {
+    "ios": null
+  },
   "source": {
-    "git": ".",
+    "git": "https://github.com/yourAds/POC-IOS-demo.git",
     "tag": "0.0.1"
   },
   "source_files": [
@@ -17,10 +20,9 @@
     "YourAdsSDK/**/*.{h,m}"
   ],
   "exclude_files": "YourAdsSDK/Exclude",
-  "platforms": {
-    "osx": null,
-    "ios": null,
-    "tvos": null,
-    "watchos": null
+  "dependencies": {
+    "OpenCV": [
+
+    ]
   }
 }

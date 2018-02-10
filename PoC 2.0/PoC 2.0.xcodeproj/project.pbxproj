@@ -10,7 +10,6 @@
 		3BD7B7EB27E73DA1E60D9A6B /* Pods_PoC_2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9921559FCB05FC3D4A65CAEC /* Pods_PoC_2_0.framework */; };
 		3DB3B29CC353FE955E7F5B36 /* Pods_PoC_2_0UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8B217966DFE814969AD094 /* Pods_PoC_2_0UITests.framework */; };
 		7C81E72772B47F022A327D07 /* Pods_PoC_2_0Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85268197897F77149CE9F9C1 /* Pods_PoC_2_0Tests.framework */; };
-		CD6F3CE51FC15DC6001204ED /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6F3CE41FC15DC6001204ED /* VideoLauncher.swift */; };
 		CD6F3CE71FC15DD4001204ED /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6F3CE61FC15DD4001204ED /* CameraController.swift */; };
 		CD6F3CE91FC16650001204ED /* SampleVideo_1280x720_1mb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CD6F3CE81FC1664F001204ED /* SampleVideo_1280x720_1mb.mp4 */; };
 		CD6F3CEB1FC16D44001204ED /* HeartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6F3CEA1FC16D44001204ED /* HeartView.xib */; };
@@ -22,6 +21,7 @@
 		CD8A6E991EE46CC800658F0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8A6E971EE46CC800658F0A /* LaunchScreen.storyboard */; };
 		CD8A6EA41EE46CC800658F0A /* PoC_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A6EA31EE46CC800658F0A /* PoC_2_0Tests.swift */; };
 		CD8A6EAF1EE46CC800658F0A /* PoC_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A6EAE1EE46CC800658F0A /* PoC_2_0UITests.swift */; };
+		CDD49CD4202E975900200724 /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD49CD3202E975900200724 /* VideoLauncher.swift */; };
 		CDDA964F1EFD551100F686A7 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA964E1EFD551100F686A7 /* AppUtility.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +50,6 @@
 		7E8B217966DFE814969AD094 /* Pods_PoC_2_0UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoC_2_0UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85268197897F77149CE9F9C1 /* Pods_PoC_2_0Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoC_2_0Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9921559FCB05FC3D4A65CAEC /* Pods_PoC_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoC_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD6F3CE41FC15DC6001204ED /* VideoLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoLauncher.swift; path = "../../POC-IOS-demo/YourAds PoC/YourAds PoC/VideoLauncher.swift"; sourceTree = "<group>"; };
 		CD6F3CE61FC15DD4001204ED /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		CD6F3CE81FC1664F001204ED /* SampleVideo_1280x720_1mb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SampleVideo_1280x720_1mb.mp4; sourceTree = "<group>"; };
 		CD6F3CEA1FC16D44001204ED /* HeartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeartView.xib; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		CD8A6EAA1EE46CC800658F0A /* PoC 2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PoC 2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8A6EAE1EE46CC800658F0A /* PoC_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoC_2_0UITests.swift; sourceTree = "<group>"; };
 		CD8A6EB01EE46CC800658F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDD49CD3202E975900200724 /* VideoLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 		CDDA964E1EFD551100F686A7 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		D7A5E831393337A77ABBFD1E /* Pods-PoC 2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoC 2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D99A138F1E7646560C60CBD8 /* Pods-PoC 2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoC 2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 				CD8A6E9A1EE46CC800658F0A /* Info.plist */,
 				CD8A6E921EE46CC800658F0A /* PoC_2_0.xcdatamodeld */,
 				CDDA964E1EFD551100F686A7 /* AppUtility.swift */,
-				CD6F3CE41FC15DC6001204ED /* VideoLauncher.swift */,
+				CDD49CD3202E975900200724 /* VideoLauncher.swift */,
 				CD6F3CE61FC15DD4001204ED /* CameraController.swift */,
 				CD6F3CEA1FC16D44001204ED /* HeartView.xib */,
 				CD6F3CE81FC1664F001204ED /* SampleVideo_1280x720_1mb.mp4 */,
@@ -448,10 +448,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OpenCV/opencv2.framework",
 				"${BUILT_PRODUCTS_DIR}/YourAdsSDK/YourAdsSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/opencv2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YourAdsSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,7 +489,7 @@
 				CD6F3CE71FC15DD4001204ED /* CameraController.swift in Sources */,
 				CD8A6E941EE46CC800658F0A /* PoC_2_0.xcdatamodeld in Sources */,
 				CD8A6E8E1EE46CC700658F0A /* ViewController.swift in Sources */,
-				CD6F3CE51FC15DC6001204ED /* VideoLauncher.swift in Sources */,
+				CDD49CD4202E975900200724 /* VideoLauncher.swift in Sources */,
 				CDDA964F1EFD551100F686A7 /* AppUtility.swift in Sources */,
 				CD8A6E8C1EE46CC700658F0A /* AppDelegate.swift in Sources */,
 			);

@@ -7,7 +7,7 @@ target 'PoC 2.0' do
 
   # Pods for PoC 2.0
 
-pod 'YourAdsSDK', :path => '../SDKtest/YourAdsSDK/'
+pod 'YourAdsSDK', :path => '../YourAdsSDK/'
 pod 'OpenCV'
 
   target 'PoC 2.0Tests' do
