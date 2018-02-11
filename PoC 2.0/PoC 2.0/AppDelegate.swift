@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    // variable and cooresponding function in order to have a changeable orientation for each ViewController
+    // variable and corresponding function in order to have a changeable orientation for each ViewController
     var orientationLock = UIInterfaceOrientationMask.all
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        // Setting the the viewController of our current window to a CollectionViewFlowLayout
+        // Setting the viewController of our current window to a CollectionViewFlowLayout
         // This is set within a NavigationController in order to be able to navigate to and from this view
         let layout = UICollectionViewFlowLayout()
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))

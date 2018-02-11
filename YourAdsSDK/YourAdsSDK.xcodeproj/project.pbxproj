@@ -11,6 +11,8 @@
 		CD2917381FC144150041F5A9 /* YourAdsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2917371FC144150041F5A9 /* YourAdsSDKTests.swift */; };
 		CD29173A1FC144150041F5A9 /* YourAdsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD29172C1FC144150041F5A9 /* YourAdsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD2917461FC14D6B0041F5A9 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2917451FC14D6B0041F5A9 /* VideoCapture.swift */; };
+		CD3951F720300C5F000B7918 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3951F520300C5E000B7918 /* OpenCVWrapper.mm */; };
+		CD3951F820300C5F000B7918 /* OpenCVWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3951F620300C5F000B7918 /* OpenCVWrapper.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 		CD2917371FC144150041F5A9 /* YourAdsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourAdsSDKTests.swift; sourceTree = "<group>"; };
 		CD2917391FC144150041F5A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD2917451FC14D6B0041F5A9 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
+		CD3951F520300C5E000B7918 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		CD3951F620300C5F000B7918 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 		CD29172B1FC144150041F5A9 /* YourAdsSDK */ = {
 			isa = PBXGroup;
 			children = (
+				CD3951F620300C5F000B7918 /* OpenCVWrapper.h */,
+				CD3951F520300C5E000B7918 /* OpenCVWrapper.mm */,
 				CD29172C1FC144150041F5A9 /* YourAdsSDK.h */,
 				CD2917451FC14D6B0041F5A9 /* VideoCapture.swift */,
 				CD29172D1FC144150041F5A9 /* Info.plist */,
@@ -97,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD29173A1FC144150041F5A9 /* YourAdsSDK.h in Headers */,
+				CD3951F820300C5F000B7918 /* OpenCVWrapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3951F720300C5F000B7918 /* OpenCVWrapper.mm in Sources */,
 				CD2917461FC14D6B0041F5A9 /* VideoCapture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +347,7 @@
 		CD29173E1FC144150041F5A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -362,6 +371,7 @@
 		CD29173F1FC144150041F5A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;

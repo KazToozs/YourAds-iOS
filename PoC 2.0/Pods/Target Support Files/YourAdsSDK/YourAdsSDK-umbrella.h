@@ -1,4 +1,5 @@
 #ifdef __OBJC__
+#import "OpenCVWrapper.h"
 #import <UIKit/UIKit.h>
 #else
 #ifndef FOUNDATION_EXPORT

@@ -8,7 +8,6 @@
 
 import UIKit
 import YourAdsSDK
-import opencv2
 
 /*
 // UICollectionViewController: view controller with a collection view in it
@@ -127,7 +126,7 @@ class VideoCell: UICollectionViewCell {
         label.backgroundColor = UIColor.purple
         label.translatesAutoresizingMaskIntoConstraints = false
         
-//        label.text = 
+        label.text = OpenCVWrapper.openCVVersionString()
         return label
     }()
     
