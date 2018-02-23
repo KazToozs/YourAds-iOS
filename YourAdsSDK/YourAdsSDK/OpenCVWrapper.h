@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface OpenCVWrapper : NSObject
 
@@ -13,5 +14,8 @@
 
 // Function to get OpenCV version
 +(NSString *) openCVVersionString;
+
+// Function to convert image to greyscale
++(UIImage *) makeGrayFromImage:(UIImage *) image;
 
 @end
