@@ -8,6 +8,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class YourAdsVideoCapture;
+
+@interface CvVideoCameraWrapper : NSObject
+-(id)initWithVideoCapture:(YourAdsVideoCapture*)c andImageView:(UIImageView*)iv;
+@end
+
 @interface OpenCVWrapper : NSObject
 
 // Define here interface with OpenCV

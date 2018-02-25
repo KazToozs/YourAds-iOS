@@ -8,58 +8,15 @@
 #import "OpenCVWrapper.h"
 #import <opencv2/opencv.hpp>
 #import <opencv2/imgcodecs/ios.h>
+#import <opencv2/videoio/cap_ios.h>
 
 @implementation OpenCVWrapper
 
 // We can use C++ code here
 
-
-
-//public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-//
-//    mRgba = inputFrame.rgba();
-//    mGray = inputFrame.gray();
-//
-//    if (mAbsoluteFaceSize == 0) {
-//        int height = mGray.rows();
-//        if (Math.round(height * mRelativeFaceSize) > 0) {
-//            mAbsoluteFaceSize = Math.round(height * mRelativeFaceSize);
-//        }
-//        mNativeDetector.setMinFaceSize(mAbsoluteFaceSize);
-//    }
-//
-//    MatOfRect faces = new MatOfRect();
-//
-//    if (mDetectorType == JAVA_DETECTOR) {
-//        if (mJavaDetector != null)
-//            mJavaDetector.detectMultiScale(mGray, faces, 1.1, 2, 2, // TODO: objdetect.CV_HAAR_SCALE_IMAGE
-//                                           new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
-//    }
-//    else if (mDetectorType == NATIVE_DETECTOR) {
-//        if (mNativeDetector != null)
-//            mNativeDetector.detect(mGray, faces);
-//    }
-//    else {
-//        Log.e(TAG, "Detection method is not selected!");
-//    }
-//
-//    Rect[] facesArray = faces.toArray();
-//    if (facesArray.length > 0 && !myVideoView.isPlaying()) {
-//        myVideoView.start();
-//    } else if (facesArray.length == 0 && myVideoView.isPlaying()){
-//        nb_pause++;
-//        myVideoView.pause();
-//    }
-//
-//    for (int i = 0; i < facesArray.length; i++)
-//        Imgproc.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);
-//
-//    return mRgba;
-//}
-
-
-
-
+// ***
+// OPENCV FUNCTIONS TAKEN DIRECTLY FROM LIBRARY TO AVOID COMPILATION CONFLICTS
+// ***
 
 UIImage* MatToUIImage(const cv::Mat& image);
 void UIImageToMat(const UIImage* image, cv::Mat& m, bool alphaExist);
@@ -143,6 +100,13 @@ void UIImageToMat(const UIImage* image,
     CGContextRelease(contextRef);
 }
 
+// ***
+// End of library functions
+// ***
+
+// ***
+// Basic OpenCV functions
+// ***
 
 +(NSString *)openCVVersionString
 {
@@ -166,4 +130,50 @@ void UIImageToMat(const UIImage* image,
     return MatToUIImage(grayMat);
 }
 
+// ***
+// End of basic OpenCV functions
+// ***
+
 @end
+
+
+
+using namespace cv;
+// Class extension to adopt the delegate protocol
+@interface CvVideoCameraWrapper () <CvVideoCameraDelegate>
+{
+}
+@end
+@implementation CvVideoCameraWrapper
+{
+    YourAdsVideoCapture * videoCapture;
+    UIImageView * imageView;
+    CvVideoCamera * videoCamera;
+}
+
+-(id)initWithVideoCapture:(YourAdsVideoCapture*)c andImageView:(UIImageView*)iv
+{
+    videoCapture = c;
+    imageView = iv;
+    
+    videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
+    // ... set up the camera
+    
+    videoCamera.delegate = self;
+    
+    return self;
+}
+// This #ifdef ... #endif is not needed except in special situations
+#ifdef __cplusplus
+- (void)processImage:(Mat&)image
+{
+    // Do some OpenCV stuff with the image
+}
+#endif
+@end
+
+//@interface CvVideoCameraWrapper () <CvVideoCameraDelegate>
+//{
+//}
+//@end
+

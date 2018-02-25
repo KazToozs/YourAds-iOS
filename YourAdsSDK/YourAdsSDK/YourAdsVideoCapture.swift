@@ -10,7 +10,7 @@ import Foundation
 import AVKit
 import AVFoundation
 
-public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var isCapturing: Bool = false
     var session: AVCaptureSession?
     var device: AVCaptureDevice?
@@ -60,13 +60,6 @@ public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
     private func addPreviewToView(view: UIView) {
         self.preview = AVCaptureVideoPreviewLayer(session: session!)
         self.preview!.frame = view.bounds
-//        if let keyWindow = UIApplication.shared.keyWindow {
-//            self.preview!.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
-//                                         y: 0,
-//                                         width: keyWindow.frame.width / 3,
-//                                         height: keyWindow.frame.height / 3)
-//
-//        }
         
         view.layer.addSublayer(self.preview!)
     }

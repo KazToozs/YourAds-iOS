@@ -15,7 +15,7 @@ import YourAdsSDK
 */
  class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var videoCapture: VideoCapture?
+    var videoCapture: YourAdsVideoCapture?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +84,7 @@ import YourAdsSDK
 
         if let keyWindow = UIApplication.shared.keyWindow {
 
-            videoCapture = VideoCapture()
+            videoCapture = YourAdsVideoCapture()
             myView.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
                                   y: 0,
                                   width: keyWindow.frame.width / 3,
