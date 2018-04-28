@@ -260,7 +260,7 @@
 				TargetAttributes = {
 					CD8A6E871EE46CC700658F0A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = DMQPVBD977;
+						DevelopmentTeam = YRZV9MTWPP;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
@@ -657,7 +657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = DMQPVBD977;
+				DEVELOPMENT_TEAM = YRZV9MTWPP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PoC\\ 2.0",
@@ -665,7 +665,7 @@
 				INFOPLIST_FILE = "PoC 2.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "YourAds.PoC-2-0";
+				PRODUCT_BUNDLE_IDENTIFIER = "YourAds-Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -680,7 +680,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = DMQPVBD977;
+				DEVELOPMENT_TEAM = YRZV9MTWPP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PoC\\ 2.0",
@@ -688,7 +688,7 @@
 				INFOPLIST_FILE = "PoC 2.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "YourAds.PoC-2-0";
+				PRODUCT_BUNDLE_IDENTIFIER = "YourAds-Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;

@@ -19,7 +19,11 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
     var faceDetector: FaceDetector?
     var dataOutput: AVCaptureVideoDataOutput?
     var dataOutputQueue: DispatchQueue?
-    var previewView: UIView?
+//    var previewView: UIView?
+    var previewView: UIImageView?
+    
+    // To be used as the Cv Camera delegate since Swift cannot support it
+    var videoCameraWrapper : CvVideoCameraWrapper!
     
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
@@ -35,13 +39,13 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         faceDetector = FaceDetector()
     }
     
-    public func startCapturing(previewView: UIView) throws {
+    public func startCapturing(previewView: UIImageView) throws {
         isCapturing = true
         
         self.previewView = previewView
-        
-        self.session = AVCaptureSession()
-        
+
+        self.videoCameraWrapper = CvVideoCameraWrapper(videoCapture:self, andImageView:previewView)
+
         try setSessionPreset()
         
         try setDeviceInput()
@@ -65,6 +69,8 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
     }
     
     private func setSessionPreset() throws {
+        self.session = AVCaptureSession()
+
         if (session!.canSetSessionPreset(AVCaptureSession.Preset.vga640x480)) {
             session!.sessionPreset = AVCaptureSession.Preset.vga640x480
         }
@@ -147,9 +153,7 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         
         
     }
-
     
-
  public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
         let image = getImageFromBuffer(buffer: sampleBuffer)
@@ -165,7 +169,6 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         }
     }
     
-    
     private func getImageFromBuffer(buffer: CMSampleBuffer) -> CIImage {
         let pixelBuffer = CMSampleBufferGetImageBuffer(buffer)
         
@@ -175,7 +178,6 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         
         return cameraImage
     }
-    
     
     private func getFacialFeaturesFromImage(image: CIImage) -> [CIFeature] {
         let imageOptions = [CIDetectorImageOrientation : 6]

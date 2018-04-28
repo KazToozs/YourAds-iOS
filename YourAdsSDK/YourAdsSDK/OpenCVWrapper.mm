@@ -14,10 +14,7 @@
 
 // We can use C++ code here
 
-// ***
-// OPENCV FUNCTIONS TAKEN DIRECTLY FROM LIBRARY TO AVOID COMPILATION CONFLICTS
-// ***
-
+// ---------- OPENCV FUNCTIONS TAKEN DIRECTLY FROM LIBRARY TO AVOID COMPILATION CONFLICTS ----------
 UIImage* MatToUIImage(const cv::Mat& image);
 void UIImageToMat(const UIImage* image, cv::Mat& m, bool alphaExist);
 
@@ -99,15 +96,9 @@ void UIImageToMat(const UIImage* image,
                        image.CGImage);
     CGContextRelease(contextRef);
 }
+// ---------- End of OpenCV functions ----------
 
-// ***
-// End of library functions
-// ***
-
-// ***
-// Basic OpenCV functions
-// ***
-
+// ---------- Functions using OpenCV methods ----------
 +(NSString *)openCVVersionString
 {
     return [NSString stringWithFormat:@"OpenCV Version %s", CV_VERSION];
@@ -129,14 +120,14 @@ void UIImageToMat(const UIImage* image,
     // Convert grayMat to UIImage and return
     return MatToUIImage(grayMat);
 }
-
-// ***
-// End of basic OpenCV functions
-// ***
-
+// ---------- End of functions using OpenCV methods ----------
 @end
 
 
+
+// ***
+// ---------- Objective C class to serve as CvVideoCaptureDelegate because Swift cannot ----------
+// ***
 
 using namespace cv;
 // Class extension to adopt the delegate protocol
@@ -159,21 +150,21 @@ using namespace cv;
     videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     // ... set up the camera
     
+    
+    
+    
     videoCamera.delegate = self;
     
     return self;
 }
 // This #ifdef ... #endif is not needed except in special situations
 #ifdef __cplusplus
-- (void)processImage:(Mat&)image
+-(void)processImage:(Mat&)image
 {
     // Do some OpenCV stuff with the image
 }
 #endif
 @end
 
-//@interface CvVideoCameraWrapper () <CvVideoCameraDelegate>
-//{
-//}
-//@end
+
 
