@@ -150,7 +150,12 @@ using namespace cv;
     videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     // ... set up the camera
     
-    
+    self->videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
+    self->videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+    self->videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
+    self->videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+    self->videoCamera.defaultFPS = 30;
+    self->videoCamera.grayscaleMode = NO;
     
     
     videoCamera.delegate = self;
@@ -161,9 +166,22 @@ using namespace cv;
 #ifdef __cplusplus
 -(void)processImage:(Mat&)image
 {
+    
     // Do some OpenCV stuff with the image
+    Mat image_copy;
+    cvtColor(image, image_copy, CV_BGRA2BGR);
+    
+    // invert image
+    bitwise_not(image_copy, image_copy);
+    cvtColor(image_copy, image, CV_BGR2BGRA);
 }
 #endif
+
+-(void)actionStart
+{
+    [self->videoCamera start];
+}
+
 @end
 
 

@@ -46,19 +46,20 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
 
         self.videoCameraWrapper = CvVideoCameraWrapper(videoCapture:self, andImageView:previewView)
 
-        try setSessionPreset()
-        
-        try setDeviceInput()
-        
-        try addInputToSession()
-        
-        setDataOutput()
-        
-        try addDataOutputToSession()
-        
-        addPreviewToView(view: self.previewView!)
-        
-        session!.startRunning()
+        self.videoCameraWrapper.actionStart()
+//        try setSessionPreset()
+//
+//        try setDeviceInput()
+//
+//        try addInputToSession()
+//
+//        setDataOutput()
+//
+//        try addDataOutputToSession()
+//
+//        addPreviewToView(view: self.previewView!)
+//
+//        session!.startRunning()
     }
     
     private func addPreviewToView(view: UIView) {

@@ -12,6 +12,8 @@
 
 @interface CvVideoCameraWrapper : NSObject
 -(id)initWithVideoCapture:(YourAdsVideoCapture*)c andImageView:(UIImageView*)iv;
+-(void)actionStart;
+
 @end
 
 @interface OpenCVWrapper : NSObject
