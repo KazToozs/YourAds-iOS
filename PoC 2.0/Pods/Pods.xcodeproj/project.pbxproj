@@ -999,6 +999,7 @@
 		CA63223D59DC3C750A9C1423A3E2ABC2 /* stabilizer.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = stabilizer.hpp; path = ios/include/videostab/stabilizer.hpp; sourceTree = "<group>"; };
 		CB5758ECB9A8CF961CA3677B2AB887DE /* util.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = util.hpp; path = ios/include/stitching/detail/util.hpp; sourceTree = "<group>"; };
 		CC28814307FC8C87AE9CE88FA3EAE30D /* eigen.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = eigen.hpp; path = ios/include/core/eigen.hpp; sourceTree = "<group>"; };
+		CD8011B6209F12A8007DFF40 /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
 		CDB2C79D6C7CEF13F1BA493B7AEC1920 /* Pods-PoC 2.0UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PoC 2.0UITests-umbrella.h"; sourceTree = "<group>"; };
 		CEFCFF26D2B4F04079BB588B422A0895 /* utility.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = utility.hpp; path = ios/include/core/utility.hpp; sourceTree = "<group>"; };
 		CF0330CAC47B04F5F29655499961B34C /* videoio.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = videoio.hpp; path = ios/include/videoio.hpp; sourceTree = "<group>"; };
@@ -1203,6 +1204,7 @@
 		9C7DCEC4659EA5238B08EFAC0EFB52BA /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
+				CD8011B6209F12A8007DFF40 /* haarcascade_frontalface_alt.xml */,
 				2DFBA73B4C9AA223348A81CFB4294DF5 /* affine.hpp */,
 				D86CF3F57C94BA804DD5A9D7437AF081 /* all_indices.h */,
 				1565C670F07F2D6A0BEC028DF6CFCD91 /* all_layers.hpp */,

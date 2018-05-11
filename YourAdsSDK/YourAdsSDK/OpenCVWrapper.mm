@@ -5,10 +5,13 @@
 //  Created by Cris Toozs on 11/02/2018.
 //
 
-#import "OpenCVWrapper.h"
 #import <opencv2/opencv.hpp>
 #import <opencv2/imgcodecs/ios.h>
 #import <opencv2/videoio/cap_ios.h>
+
+#include <opencv2/core/core.hpp>
+#include "opencv2/highgui.hpp"
+#import "OpenCVWrapper.h"
 
 @implementation OpenCVWrapper
 
@@ -121,6 +124,7 @@ void UIImageToMat(const UIImage* image,
     return MatToUIImage(grayMat);
 }
 // ---------- End of functions using OpenCV methods ----------
+
 @end
 
 
@@ -174,7 +178,50 @@ using namespace cv;
     // invert image
     bitwise_not(image_copy, image_copy);
     cvtColor(image_copy, image, CV_BGR2BGRA);
+    
+    detectFaces(image_copy);
 }
+
+
+cv::CascadeClassifier face_cascade;
+String window_name = "Face Detection";
+
+/**
+ * Detects faces and draws an ellipse around them
+ */
+void detectFaces(Mat frame) {
+    
+    std::vector<cv::Rect> faces;
+    Mat frame_gray;
+    cvtColor(frame, frame_gray, COLOR_BGR2GRAY);  // Convert to gray scale
+    equalizeHist(frame_gray, frame_gray);       // Equalize histogram
+    
+    
+//    String face_cascade_name = "/Users/kaztoozs/Documents/Projects/EIP/Try Again/PoC 2.0/Pods/OpenCV/ios/haarcascade_frontalface_alt.xml";
+
+    String face_cascade_name = "haarcascade_frontalface_alt.xml";
+
+    if (!face_cascade.load(face_cascade_name)){ printf("--(!)Error loading face cascade\n"); return; };
+
+    
+    // Detect faces
+    face_cascade.detectMultiScale(frame_gray, faces, 1.1, 3,
+                                  0|CASCADE_SCALE_IMAGE, cv::Size(30, 30));
+    
+    // Iterate over all of the faces
+    for( size_t i = 0; i < faces.size(); i++ ) {
+        
+        // Find center of faces
+        cv::Point center(faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2);
+        
+        // Draw ellipse around face
+        ellipse(frame, center, cv::Size(faces[i].width/2, faces[i].height/2),
+                0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
+    }
+    
+    imshow(window_name, frame);  // Display frame
+}
+
 #endif
 
 -(void)actionStart
