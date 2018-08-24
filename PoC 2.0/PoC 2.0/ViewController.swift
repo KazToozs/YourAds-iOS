@@ -8,7 +8,6 @@
 
 import UIKit
 import YourAdsSDK
-import opencv2
 
 /*
 // UICollectionViewController: view controller with a collection view in it
