@@ -15,12 +15,10 @@ import YourAdsSDK
 */
  class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var videoCapture: YourAdsVideoCapture?
+    var videoCapture: VideoCapture?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
         
         navigationItem.title = "Home"
@@ -74,23 +72,19 @@ import YourAdsSDK
         return 0
     }
     
-    // OLD CAMERA ACTIVATION
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let videoLauncher = VideoLauncher()
-        let myView = UIImageView()
+        let myView = UIView()
 //        let cameraLauncher = CameraLauncher()
-
+        
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
-
+        
         videoLauncher.showVideoPlayer()
 
         if let keyWindow = UIApplication.shared.keyWindow {
 
-            videoCapture = YourAdsVideoCapture()
-
-
+            videoCapture = VideoCapture()
             myView.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
                                   y: 0,
                                   width: keyWindow.frame.width / 3,
@@ -98,7 +92,7 @@ import YourAdsSDK
 
             keyWindow.addSubview(myView)
 
-
+        
             self.view = UIApplication.shared.keyWindow
             do {
                 try videoCapture?.startCapturing(previewView: myView)
@@ -106,11 +100,12 @@ import YourAdsSDK
             catch {
             }
         }
+    
 //        cameraLauncher.showCamera()
+
     }
     
 }
-    
 
 // Cell for a video
 class VideoCell: UICollectionViewCell {
@@ -131,7 +126,7 @@ class VideoCell: UICollectionViewCell {
         label.backgroundColor = UIColor.purple
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = OpenCVWrapper.openCVVersionString()
+//        label.text = 
         return label
     }()
     

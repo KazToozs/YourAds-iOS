@@ -108,38 +108,76 @@ class CameraView: UIImageView, AVCaptureVideoDataOutputSampleBufferDelegate
         session?.startRunning()
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput,
-                    didOutput sampleBuffer: CMSampleBuffer,
-                    from connection: AVCaptureConnection)
-    {
-        // got an image
-        let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-        let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, kCMAttachmentMode_ShouldPropagate);
-        let ciImage : CIImage = CIImage(cvPixelBuffer: pixelBuffer!, options: attachments as? [String : AnyObject])
-        
-        let exifOrientation = 6; //   6  =  0th row is on the right, and 0th column is the top. Portrait mode.
-        let imageOptions : NSDictionary = [CIDetectorImageOrientation : NSNumber(value: exifOrientation), CIDetectorSmile : true, CIDetectorEyeBlink : true]
+        func captureOutput(_ captureOutput: AVCaptureOutput,
+                           didOutput sampleBuffer: CMSampleBuffer,
+                           from connection: AVCaptureConnection)
+        {
+            // got an image
+            let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+            let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, kCMAttachmentMode_ShouldPropagate);
+            let ciImage : CIImage = CIImage(cvPixelBuffer: pixelBuffer!, options: attachments as? [String : AnyObject])
+            
+            let exifOrientation = 6; //   6  =  0th row is on the right, and 0th column is the top. Portrait mode.
+            let imageOptions : NSDictionary = [CIDetectorImageOrientation : NSNumber(value: exifOrientation), CIDetectorSmile : true, CIDetectorEyeBlink : true]
 
-        faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy : CIDetectorAccuracyLow, CIDetectorTracking : true])
+            faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy : CIDetectorAccuracyLow, CIDetectorTracking : true])
 
-        let features = faceDetector.features(in: ciImage, options: imageOptions as? [String : AnyObject])
+            let features = faceDetector.features(in: ciImage, options: imageOptions as? [String : AnyObject])
 
-        // get the clean aperture
-        // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
-        // that represents image data valid for display.
-        let fdesc : CMFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)!
-        let clap : CGRect = CMVideoFormatDescriptionGetCleanAperture(fdesc, false)
-        
-        // called asynchronously as the capture output is capturing sample buffers, this method asks the face detector
-        // to detect features
-        
-        DispatchQueue.main.async {
-            self.drawFaceBoxesForFeatures(features: features, clap: clap, orientation: UIDevice.current.orientation)
-        }
-       
+            
+            
+            // get the clean aperture
+            // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
+            // that represents image data valid for display.
+            let fdesc : CMFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)!
+            let clap : CGRect = CMVideoFormatDescriptionGetCleanAperture(fdesc, false)
+            
+            // called asynchronously as the capture output is capturing sample buffers, this method asks the face detector
+            // to detect features
+            
+//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                self.drawFaceBoxesForFeatures(features, clap: clap, orientation: .portrait)
+//            })
+
+            
+            DispatchQueue.main.async {
+                self.drawFaceBoxesForFeatures(features: features, clap: clap, orientation: UIDevice.current.orientation)
+            }
+           
     }
 
-
+    
+    
+//            DispatchQueue.main.async {
+//                let parentFrameSize = self.previewView?.frame.size
+//                let gravity = self.previewLayer?.videoGravity
+//                
+//                var previewBox: CGRect = previewLayer.videoPreviewBox(for: gravity, frameSize: parentFrameSize, apertureSize: clap.size)
+//                if self.delegate.responds(to: Selector("detectedFaceController:features:forVideoBox:withPreviewBox:")) {
+//                    self.delegate.detectedFaceController(self, features: features, forVideoBox: clap, withPreviewBox: previewBox)
+//                }
+//                
+//            }
+    
+    
+//    func startDetection() {
+//        self.handleCamera()
+//        self.output?.connection(withMediaType: AVMediaTypeVideo).isEnabled = true
+//        var detectorOptions: [String: Any] = [CIDetectorAccuracy: CIDetectorAccuracyLow]
+//        self.faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: detectorOptions)
+//    }
+    
+//    func stopDetection() {
+//        self.teardownAVCapture()
+//    }
+//    // clean up capture setup
+//    
+//    func teardownAVCapture() {
+//        if self.videoDataOutputQueue {
+//            self.videoDataOutputQueue = nil
+//        }
+//    }
+            
     
     func drawFaceBoxesForFeatures(features : [CIFeature], clap : CGRect, orientation : UIDeviceOrientation) {
         
@@ -171,6 +209,27 @@ class CameraView: UIImageView, AVCaptureVideoDataOutputSampleBufferDelegate
         
         for ff in features as! [CIFaceFeature] {
             // set text on label
+//            var x : CGFloat = 0.0, y : CGFloat = 0.0
+//            if ff.hasLeftEyePosition {
+//                x = ff.leftEyePosition.x
+//                y = ff.leftEyePosition.y
+//                //                eyeLeftLabel.text = ff.leftEyeClosed ? "(\(x) \(y))" : "(\(x) \(y))" + "👀"
+//                eyeLeftLabel.text = ff.leftEyeClosed ? "" : "👀"
+//            }
+//            
+//            if ff.hasRightEyePosition {
+//                x = ff.rightEyePosition.x
+//                y = ff.rightEyePosition.y
+//                //                eyeRightLabel.text = ff.rightEyeClosed ? "(\(x) \(y))" : "(\(x) \(y))" + "👀"
+//                eyeRightLabel.text = ff.rightEyeClosed ? "" : "👀"
+//            }
+//            
+//            if ff.hasMouthPosition {
+//                x = ff.mouthPosition.x
+//                y = ff.mouthPosition.y
+//                //                mouthLabel.text = ff.hasSmile ? "\(x) \(y)" + "😊" : "(\(x) \(y))"
+//                mouthLabel.text = ff.hasSmile ? "😊" : ""
+//            }
             
             // find the correct position for the square layer within the previewLayer
             // the feature box originates in the bottom left of the video frame.
@@ -212,6 +271,7 @@ class CameraView: UIImageView, AVCaptureVideoDataOutputSampleBufferDelegate
             // create a new one if necessary
             if featureLayer == nil {
                 featureLayer = CALayer()
+//                featureLayer?.contents = square.CGImage
                 featureLayer?.name = "FaceLayer"
                 previewLayer?.addSublayer(featureLayer!)
             }
@@ -223,7 +283,6 @@ class CameraView: UIImageView, AVCaptureVideoDataOutputSampleBufferDelegate
         
         CATransaction.commit()
     }
-    
     
     func videoPreviewBoxForGravity(gravity : NSString, frameSize : CGSize, apertureSize : CGSize) -> CGRect {
         let apertureRatio : CGFloat = apertureSize.height / apertureSize.width

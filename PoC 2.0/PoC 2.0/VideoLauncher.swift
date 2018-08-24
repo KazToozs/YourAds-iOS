@@ -86,10 +86,12 @@ class VideoPlayerView: UIView {
     // Setup video containers and play video in view
     private func playVideo() {
         
-        let videoURL = URL(string: "http://79.137.86.208/api/resources/videos/epitechgp.3gp")
+        
+        let videoURL: NSURL = Bundle.main.url(forResource: "SampleVideo_1280x720_1mb", withExtension: "mp4")! as NSURL
         
         
-        player = AVPlayer(url: videoURL!)
+        
+        player = AVPlayer(url: videoURL as URL)
         
         let playerLayer = AVPlayerLayer(player: player)
         self.layer.addSublayer(playerLayer)

@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "OpenCVWrapper.h"
 #import "YourAdsSDK.h"
 
 FOUNDATION_EXPORT double YourAdsSDKVersionNumber;

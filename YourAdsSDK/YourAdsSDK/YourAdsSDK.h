@@ -6,7 +6,7 @@
 //  Copyright © 2017 Cris Toozs. All rights reserved.
 //
 
-#import <YourAdsSDK/OpenCVWrapper.h>
+#import <UIKit/UIKit.h>
 
 //! Project version number for YourAdsSDK.
 FOUNDATION_EXPORT double YourAdsSDKVersionNumber;

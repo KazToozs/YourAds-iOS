@@ -10,7 +10,7 @@ import Foundation
 import AVKit
 import AVFoundation
 
-public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var isCapturing: Bool = false
     var session: AVCaptureSession?
     var device: AVCaptureDevice?
@@ -19,11 +19,7 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
     var faceDetector: FaceDetector?
     var dataOutput: AVCaptureVideoDataOutput?
     var dataOutputQueue: DispatchQueue?
-//    var previewView: UIView?
-    var previewView: UIImageView?
-    
-    // To be used as the Cv Camera delegate since Swift cannot support it
-    var videoCameraWrapper : CvVideoCameraWrapper!
+    var previewView: UIView?
     
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
@@ -39,39 +35,43 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         faceDetector = FaceDetector()
     }
     
-    public func startCapturing(previewView: UIImageView) throws {
+    public func startCapturing(previewView: UIView) throws {
         isCapturing = true
         
         self.previewView = previewView
-
-        self.videoCameraWrapper = CvVideoCameraWrapper(videoCapture:self, andImageView:previewView)
-
-        self.videoCameraWrapper.actionStart()
-//        try setSessionPreset()
-//
-//        try setDeviceInput()
-//
-//        try addInputToSession()
-//
-//        setDataOutput()
-//
-//        try addDataOutputToSession()
-//
-//        addPreviewToView(view: self.previewView!)
-//
-//        session!.startRunning()
+        
+        self.session = AVCaptureSession()
+        
+        try setSessionPreset()
+        
+        try setDeviceInput()
+        
+        try addInputToSession()
+        
+        setDataOutput()
+        
+        try addDataOutputToSession()
+        
+        addPreviewToView(view: self.previewView!)
+        
+        session!.startRunning()
     }
     
     private func addPreviewToView(view: UIView) {
         self.preview = AVCaptureVideoPreviewLayer(session: session!)
         self.preview!.frame = view.bounds
+//        if let keyWindow = UIApplication.shared.keyWindow {
+//            self.preview!.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
+//                                         y: 0,
+//                                         width: keyWindow.frame.width / 3,
+//                                         height: keyWindow.frame.height / 3)
+//
+//        }
         
         view.layer.addSublayer(self.preview!)
     }
     
     private func setSessionPreset() throws {
-        self.session = AVCaptureSession()
-
         if (session!.canSetSessionPreset(AVCaptureSession.Preset.vga640x480)) {
             session!.sessionPreset = AVCaptureSession.Preset.vga640x480
         }
@@ -154,7 +154,9 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         
         
     }
+
     
+
  public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
         let image = getImageFromBuffer(buffer: sampleBuffer)
@@ -170,6 +172,7 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         }
     }
     
+    
     private func getImageFromBuffer(buffer: CMSampleBuffer) -> CIImage {
         let pixelBuffer = CMSampleBufferGetImageBuffer(buffer)
         
@@ -179,6 +182,7 @@ public class YourAdsVideoCapture: NSObject, AVCaptureVideoDataOutputSampleBuffer
         
         return cameraImage
     }
+    
     
     private func getFacialFeaturesFromImage(image: CIImage) -> [CIFeature] {
         let imageOptions = [CIDetectorImageOrientation : 6]

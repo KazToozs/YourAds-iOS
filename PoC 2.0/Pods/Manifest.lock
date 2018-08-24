@@ -1,16 +1,20 @@
 PODS:
-  - YourAdsSDK (0.0.1)
+  - OpenCV (3.3.1)
+  - YourAdsSDK (0.0.1):
+    - OpenCV
 
 DEPENDENCIES:
+  - OpenCV
   - YourAdsSDK (from `../YourAdsSDK/`)
 
 EXTERNAL SOURCES:
   YourAdsSDK:
-    :path: "../YourAdsSDK/"
+    :path: ../YourAdsSDK/
 
 SPEC CHECKSUMS:
-  YourAdsSDK: 7a98e5aabd3eecb86d580acec4271c429eb945ce
+  OpenCV: d81447860f038d60723084aa02ecc963f95c55fa
+  YourAdsSDK: 0ab997244b9ac0f603a396cb92831d1657d62402
 
-PODFILE CHECKSUM: 3ab33d369b4a6beeaff753e2d6e53d57edf2161a
+PODFILE CHECKSUM: 23ea7a6ca8a23fe4a21f4d724b9b777091a0c0ec
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0
