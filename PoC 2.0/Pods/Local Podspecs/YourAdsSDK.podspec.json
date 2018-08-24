@@ -19,10 +19,5 @@
     "YourAdsSDK",
     "YourAdsSDK/**/*.{h,m}"
   ],
-  "exclude_files": "YourAdsSDK/Exclude",
-  "dependencies": {
-    "OpenCV": [
-
-    ]
-  }
+  "exclude_files": "YourAdsSDK/Exclude"
 }

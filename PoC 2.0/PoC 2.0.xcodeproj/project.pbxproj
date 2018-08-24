@@ -21,6 +21,7 @@
 		CD8A6E991EE46CC800658F0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8A6E971EE46CC800658F0A /* LaunchScreen.storyboard */; };
 		CD8A6EA41EE46CC800658F0A /* PoC_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A6EA31EE46CC800658F0A /* PoC_2_0Tests.swift */; };
 		CD8A6EAF1EE46CC800658F0A /* PoC_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A6EAE1EE46CC800658F0A /* PoC_2_0UITests.swift */; };
+		CD8EFC78211ADD6F006923B7 /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD8EFC77211ADD69006923B7 /* haarcascade_frontalface_alt.xml */; };
 		CDD49CD4202E975900200724 /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD49CD3202E975900200724 /* VideoLauncher.swift */; };
 		CDDA964F1EFD551100F686A7 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA964E1EFD551100F686A7 /* AppUtility.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		CD8A6EAA1EE46CC800658F0A /* PoC 2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PoC 2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8A6EAE1EE46CC800658F0A /* PoC_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoC_2_0UITests.swift; sourceTree = "<group>"; };
 		CD8A6EB01EE46CC800658F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD8EFC77211ADD69006923B7 /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
 		CDD49CD3202E975900200724 /* VideoLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 		CDDA964E1EFD551100F686A7 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		E20B372231CA83335D45BB31 /* Pods-PoC 2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoC 2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				CD6F3CE61FC15DD4001204ED /* CameraController.swift */,
 				CD6F3CEA1FC16D44001204ED /* HeartView.xib */,
 				CD6F3CE81FC1664F001204ED /* SampleVideo_1280x720_1mb.mp4 */,
+				CD8EFC77211ADD69006923B7 /* haarcascade_frontalface_alt.xml */,
 			);
 			path = "PoC 2.0";
 			sourceTree = "<group>";
@@ -195,7 +198,6 @@
 				CD8A6E851EE46CC700658F0A /* Frameworks */,
 				CD8A6E861EE46CC700658F0A /* Resources */,
 				15455CFD9C3921E40A6F1497 /* [CP] Embed Pods Frameworks */,
-				88B51A0038A2D23F1C33D3F9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,8 +216,6 @@
 				CD8A6E9B1EE46CC800658F0A /* Sources */,
 				CD8A6E9C1EE46CC800658F0A /* Frameworks */,
 				CD8A6E9D1EE46CC800658F0A /* Resources */,
-				AF886BFA5053FF5F4D67A2C2 /* [CP] Embed Pods Frameworks */,
-				6A687721F56FAD56A5B721F5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,8 +235,6 @@
 				CD8A6EA61EE46CC800658F0A /* Sources */,
 				CD8A6EA71EE46CC800658F0A /* Frameworks */,
 				CD8A6EA81EE46CC800658F0A /* Resources */,
-				C24722A4BD7D0BB69634358B /* [CP] Embed Pods Frameworks */,
-				43AE6774FCC7EA222533E470 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -305,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8EFC78211ADD6F006923B7 /* haarcascade_frontalface_alt.xml in Resources */,
 				CD8A6E991EE46CC800658F0A /* LaunchScreen.storyboard in Resources */,
 				CD8A6E961EE46CC800658F0A /* Assets.xcassets in Resources */,
 				CD6F3CE91FC16650001204ED /* SampleVideo_1280x720_1mb.mp4 in Resources */,
@@ -337,92 +336,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/OpenCV/opencv2.framework",
 				"${BUILT_PRODUCTS_DIR}/YourAdsSDK/YourAdsSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/opencv2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YourAdsSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		43AE6774FCC7EA222533E470 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6A687721F56FAD56A5B721F5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0Tests/Pods-PoC 2.0Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		88B51A0038A2D23F1C33D3F9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF886BFA5053FF5F4D67A2C2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0Tests/Pods-PoC 2.0Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C24722A4BD7D0BB69634358B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CBFD97F9219E6DB6BC4DE808 /* [CP] Check Pods Manifest.lock */ = {
