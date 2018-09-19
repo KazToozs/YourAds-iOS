@@ -21,7 +21,7 @@
   ],
   "exclude_files": "YourAdsSDK/Exclude",
   "dependencies": {
-    "OpenCV": [
+    "Alamofire": [
 
     ]
   }

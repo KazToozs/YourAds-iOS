@@ -10,8 +10,14 @@ import Foundation
 import AVKit
 import AVFoundation
 
+/*
+ ** VideoCapture sets up the camera run session and structures the modification of it's output
+ ** Subclass VideoCaptureDevice is the 'device' that handles the live monitoring of the camera output
+ ** Subclass FaceDetector collects facial features from the image provided and returns them
+ */
 public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var isCapturing: Bool = false
+    var isWatching: Bool = false
     var session: AVCaptureSession?
     var device: AVCaptureDevice?
     var input: AVCaptureInput?
@@ -20,6 +26,7 @@ public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
     var dataOutput: AVCaptureVideoDataOutput?
     var dataOutputQueue: DispatchQueue?
     var previewView: UIView?
+    var videoPlayerView: VideoPlayerView?
     
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
@@ -35,38 +42,30 @@ public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         faceDetector = FaceDetector()
     }
     
+    /*
+    ** Sets the live camera display to the given UIView with live face detection
+    */
     public func startCapturing(previewView: UIView) throws {
         isCapturing = true
         
         self.previewView = previewView
         
+        // setup the device for frontal camera live capture and output
         self.session = AVCaptureSession()
-        
         try setSessionPreset()
-        
         try setDeviceInput()
-        
         try addInputToSession()
-        
         setDataOutput()
-        
         try addDataOutputToSession()
         
+        // set camera output to given view and start running
         addPreviewToView(view: self.previewView!)
-        
         session!.startRunning()
     }
     
     private func addPreviewToView(view: UIView) {
         self.preview = AVCaptureVideoPreviewLayer(session: session!)
         self.preview!.frame = view.bounds
-//        if let keyWindow = UIApplication.shared.keyWindow {
-//            self.preview!.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
-//                                         y: 0,
-//                                         width: keyWindow.frame.width / 3,
-//                                         height: keyWindow.frame.height / 3)
-//
-//        }
         
         view.layer.addSublayer(self.preview!)
     }
@@ -88,6 +87,10 @@ public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         else {
             throw VideoCaptureError.DataOutputCouldNotBeAddedToSession
         }
+    }
+    
+    public func setVideoPlayerView(videoPlayerView: VideoPlayerView) {
+        self.videoPlayerView = videoPlayerView
     }
     
     private func setDeviceInput() throws {
@@ -126,58 +129,68 @@ public class VideoCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
     
     class VideoCaptureDevice {
         
-//        static func create() -> AVCaptureDevice.DiscoverySession {
-//            let device = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.front)
-//
-//            return device
-//            
-//        }
+    //        static func create() -> AVCaptureDevice.DiscoverySession {
+    //            let device = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.front)
+    //
+    //            return device
+    //
+    //        }
 
-/*
-**     Commented code here is functional code from Swift 2 - 3
-*/
-    static func create() -> AVCaptureDevice {
-                    var device: AVCaptureDevice?
+    /*
+    **     Commented code here is functional code from Swift 2 - 3
+    */
+        static func create() -> AVCaptureDevice {
+                        var device: AVCaptureDevice?
 
-                    AVCaptureDevice.devices(for: AVMediaType.video).forEach { videoDevice in
-                        if ((videoDevice as AnyObject).position == AVCaptureDevice.Position.front) {
-                            device = videoDevice as AVCaptureDevice
+                        AVCaptureDevice.devices(for: AVMediaType.video).forEach { videoDevice in
+                            if ((videoDevice as AnyObject).position == AVCaptureDevice.Position.front) {
+                                device = videoDevice as AVCaptureDevice
+                            }
                         }
-                    }
 
-                    if (nil == device) {
-                        device = AVCaptureDevice.default(for: .video)
-                    }
+                        if (nil == device) {
+                            device = AVCaptureDevice.default(for: .video)
+                        }
 
-                    return device!
-    }
-        
+                        return device!
+        }
         
     }
 
     
-
- public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
+    /*
+    ** For each image caputred in the camera input, find facial features and alter the image
+    */
+    public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let image = getImageFromBuffer(buffer: sampleBuffer)
-    
         let features = getFacialFeaturesFromImage(image: image)
-        
         let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
-        
         let cleanAperture = CMVideoFormatDescriptionGetCleanAperture(formatDescription!, false)
         
+        if (features.isEmpty) {
+            isWatching = false
+            if (videoPlayerView?.isPlaying == true) {
+                videoPlayerView?.handlePause()
+            }
+        }
+        else {
+            isWatching = true
+            if (videoPlayerView?.isPlaying == false) {
+                videoPlayerView?.handlePause()
+            }
+        }
         DispatchQueue.main.async() {
             self.alterPreview(features: features, cleanAperture: cleanAperture)
         }
     }
     
+    public func getIsWatching() -> Bool {
+        return isWatching
+    }
     
     private func getImageFromBuffer(buffer: CMSampleBuffer) -> CIImage {
         let pixelBuffer = CMSampleBufferGetImageBuffer(buffer)
-        
         let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, buffer, kCMAttachmentMode_ShouldPropagate)
-        
         let cameraImage = CIImage(cvPixelBuffer: pixelBuffer!, options: attachments as? [String : Any])
         
         return cameraImage

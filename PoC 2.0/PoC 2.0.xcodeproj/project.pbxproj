@@ -21,7 +21,6 @@
 		CD8A6E991EE46CC800658F0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8A6E971EE46CC800658F0A /* LaunchScreen.storyboard */; };
 		CD8A6EA41EE46CC800658F0A /* PoC_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A6EA31EE46CC800658F0A /* PoC_2_0Tests.swift */; };
 		CD8A6EAF1EE46CC800658F0A /* PoC_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A6EAE1EE46CC800658F0A /* PoC_2_0UITests.swift */; };
-		CDD49CD4202E975900200724 /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD49CD3202E975900200724 /* VideoLauncher.swift */; };
 		CDDA964F1EFD551100F686A7 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA964E1EFD551100F686A7 /* AppUtility.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +66,6 @@
 		CD8A6EAA1EE46CC800658F0A /* PoC 2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PoC 2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8A6EAE1EE46CC800658F0A /* PoC_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoC_2_0UITests.swift; sourceTree = "<group>"; };
 		CD8A6EB01EE46CC800658F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CDD49CD3202E975900200724 /* VideoLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 		CDDA964E1EFD551100F686A7 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		D7A5E831393337A77ABBFD1E /* Pods-PoC 2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoC 2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D99A138F1E7646560C60CBD8 /* Pods-PoC 2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoC 2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 				CD8A6E9A1EE46CC800658F0A /* Info.plist */,
 				CD8A6E921EE46CC800658F0A /* PoC_2_0.xcdatamodeld */,
 				CDDA964E1EFD551100F686A7 /* AppUtility.swift */,
-				CDD49CD3202E975900200724 /* VideoLauncher.swift */,
 				CD6F3CE61FC15DD4001204ED /* CameraController.swift */,
 				CD6F3CEA1FC16D44001204ED /* HeartView.xib */,
 				CD6F3CE81FC1664F001204ED /* SampleVideo_1280x720_1mb.mp4 */,
@@ -195,7 +192,6 @@
 				CD8A6E851EE46CC700658F0A /* Frameworks */,
 				CD8A6E861EE46CC700658F0A /* Resources */,
 				AF3D3B552275C405564D6496 /* [CP] Embed Pods Frameworks */,
-				797D6AD12C283779EE72F618 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,8 +210,6 @@
 				CD8A6E9B1EE46CC800658F0A /* Sources */,
 				CD8A6E9C1EE46CC800658F0A /* Frameworks */,
 				CD8A6E9D1EE46CC800658F0A /* Resources */,
-				0FF832F14746BE72B6BDD3E9 /* [CP] Embed Pods Frameworks */,
-				5C6DB4E41FD2F6624EBE1BA4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,8 +229,6 @@
 				CD8A6EA61EE46CC800658F0A /* Sources */,
 				CD8A6EA71EE46CC800658F0A /* Frameworks */,
 				CD8A6EA81EE46CC800658F0A /* Resources */,
-				6C14735DB037C21FFA5F1B2F /* [CP] Embed Pods Frameworks */,
-				1A545F69F7FF13404EA3EE9D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,7 +247,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Cris Toozs";
 				TargetAttributes = {
 					CD8A6E871EE46CC700658F0A = {
@@ -348,81 +340,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0FF832F14746BE72B6BDD3E9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0Tests/Pods-PoC 2.0Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1A545F69F7FF13404EA3EE9D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5C6DB4E41FD2F6624EBE1BA4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0Tests/Pods-PoC 2.0Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C14735DB037C21FFA5F1B2F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0UITests/Pods-PoC 2.0UITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		797D6AD12C283779EE72F618 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		92D91421505A2BE3176942F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -448,12 +365,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PoC 2.0/Pods-PoC 2.0-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/OpenCV/opencv2.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/YourAdsSDK/YourAdsSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/opencv2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YourAdsSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,7 +406,6 @@
 				CD6F3CE71FC15DD4001204ED /* CameraController.swift in Sources */,
 				CD8A6E941EE46CC800658F0A /* PoC_2_0.xcdatamodeld in Sources */,
 				CD8A6E8E1EE46CC700658F0A /* ViewController.swift in Sources */,
-				CDD49CD4202E975900200724 /* VideoLauncher.swift in Sources */,
 				CDDA964F1EFD551100F686A7 /* AppUtility.swift in Sources */,
 				CD8A6E8C1EE46CC700658F0A /* AppDelegate.swift in Sources */,
 			);
@@ -560,6 +476,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -567,6 +484,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -616,6 +534,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -623,6 +542,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -646,7 +566,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

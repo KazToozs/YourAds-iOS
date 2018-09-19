@@ -16,18 +16,19 @@ import YourAdsSDK
  class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var videoCapture: VideoCapture?
+    var videoHelper: YourAdsHelper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        videoHelper = YourAdsHelper();
         
         navigationItem.title = "Home"
         
         collectionView?.backgroundColor = UIColor.white
         
-        
         // registers the cells for the specified Cell identifier and turns them into the given object type
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(VideoThumbnailCell.self, forCellWithReuseIdentifier: "cellId")
     }
 
     // On view appear, lock orientation to portrait
@@ -73,42 +74,15 @@ import YourAdsSDK
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let videoLauncher = VideoLauncher()
-        let myView = UIView()
-//        let cameraLauncher = CameraLauncher()
+        videoCapture = VideoCapture()
         
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        videoLauncher.showVideoPlayer()
-
-        if let keyWindow = UIApplication.shared.keyWindow {
-
-            videoCapture = VideoCapture()
-            myView.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
-                                  y: 0,
-                                  width: keyWindow.frame.width / 3,
-                                  height: keyWindow.frame.height / 3)
-
-            keyWindow.addSubview(myView)
-
-        
-            self.view = UIApplication.shared.keyWindow
-            do {
-                try videoCapture?.startCapturing(previewView: myView)
-            }
-            catch {
-            }
-        }
-    
-//        cameraLauncher.showCamera()
-
+        videoHelper?.launchYourAdsAdvertisement(viewController: self, videoCapturer: videoCapture!)
     }
     
 }
 
 // Cell for a video
-class VideoCell: UICollectionViewCell {
+class VideoThumbnailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -218,3 +192,4 @@ extension UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
+
