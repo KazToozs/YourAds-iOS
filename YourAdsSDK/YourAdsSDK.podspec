@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "YourAdsSDK"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
 
   s.summary      = "My description of YourAdsSDK"
 
@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-   s.platform     = :ios
+  s.platform     = :ios
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/yourAds/POC-IOS-demo.git", :tag => "#{s.version}" }
+  s.source       = { :git => "git@github.com:yourAds/POC-IOS-demo.git", :tag => "master" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "YourAdsSDK", "YourAdsSDK/**/*.{h,m}"
+  s.source_files  = "YourAdsSDK", "YourAdsSDK/**/*.{h,m,swift}"
   s.exclude_files = "YourAdsSDK/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -134,7 +134,7 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
-   s.dependency "Alamofire"
+  s.dependency "Alamofire"
 
 
 end

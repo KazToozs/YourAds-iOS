@@ -59,32 +59,9 @@ class HomeCollectionViewController: UICollectionViewController {
         {
             return
         }
-        Alamofire.request(url,
-                          method: .get,
-                          headers: ["PhoneIdentifiers" : yourAdsHelper.advertisingId, "type" : "iOS"])
-            .responseJSON { response in
-                print(response)
-                print("status: \(String(describing: response.response?.statusCode))")
-                //to get status code
-                if let status = response.response?.statusCode {
-                    switch(status){
-                    case 200:
-                        print("example success")
-                    default:
-                        print("error with response status: \(status)")
-                    }
-                }
-                //to get JSON return value
-                if let results = response.result.value as? [Any] {
-                    for result in results {
-                        let JSON = result as! NSDictionary
-                        
-                        videoJSONArray?.append(contentsOf: JSON)
-                        print(JSON)
-                    }
-                }
-                self.collectionView?.reloadData()
-        }
+        
+        
+        
     }
 }
 

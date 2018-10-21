@@ -1,6 +1,6 @@
 {
   "name": "YourAdsSDK",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "summary": "My description of YourAdsSDK",
   "description": "Description la dee daa",
   "homepage": "http://EXAMPLE/YourAdsSDK",
@@ -12,12 +12,12 @@
     "ios": null
   },
   "source": {
-    "git": "https://github.com/yourAds/POC-IOS-demo.git",
-    "tag": "0.0.1"
+    "git": "git@github.com:yourAds/POC-IOS-demo.git",
+    "tag": "master"
   },
   "source_files": [
     "YourAdsSDK",
-    "YourAdsSDK/**/*.{h,m}"
+    "YourAdsSDK/**/*.{h,m,swift}"
   ],
   "exclude_files": "YourAdsSDK/Exclude",
   "dependencies": {

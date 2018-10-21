@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AA31FE6217CDB0500CD43A9 /* YourAdsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA31FE3217CDB0500CD43A9 /* YourAdsHelper.swift */; };
+		0AA31FE7217CDB0500CD43A9 /* YourAdsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA31FE5217CDB0500CD43A9 /* YourAdsController.swift */; };
 		CD16CFEF215E13F8006CF6E7 /* YourAdsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD16CFE5215E13F7006CF6E7 /* YourAdsSDK.framework */; };
 		CD16CFF4215E13F8006CF6E7 /* YourAdsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16CFF3215E13F8006CF6E7 /* YourAdsSDKTests.swift */; };
 		CD16CFF6215E13F8006CF6E7 /* YourAdsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD16CFE8215E13F7006CF6E7 /* YourAdsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +25,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AA31FE3217CDB0500CD43A9 /* YourAdsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAdsHelper.swift; sourceTree = "<group>"; };
+		0AA31FE5217CDB0500CD43A9 /* YourAdsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAdsController.swift; sourceTree = "<group>"; };
 		CD16CFE5215E13F7006CF6E7 /* YourAdsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YourAdsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD16CFE8215E13F7006CF6E7 /* YourAdsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YourAdsSDK.h; sourceTree = "<group>"; };
 		CD16CFE9215E13F8006CF6E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +54,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AA31FE2217CDB0500CD43A9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0AA31FE3217CDB0500CD43A9 /* YourAdsHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0AA31FE4217CDB0500CD43A9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0AA31FE5217CDB0500CD43A9 /* YourAdsController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		CD16CFDB215E13F7006CF6E7 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +91,8 @@
 		CD16CFE7215E13F7006CF6E7 /* YourAdsSDK */ = {
 			isa = PBXGroup;
 			children = (
+				0AA31FE4217CDB0500CD43A9 /* Controllers */,
+				0AA31FE2217CDB0500CD43A9 /* Helpers */,
 				CD16CFE8215E13F7006CF6E7 /* YourAdsSDK.h */,
 				CD16CFE9215E13F8006CF6E7 /* Info.plist */,
 			);
@@ -194,6 +216,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA31FE6217CDB0500CD43A9 /* YourAdsHelper.swift in Sources */,
+				0AA31FE7217CDB0500CD43A9 /* YourAdsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +413,7 @@
 		CD16CFFD215E13F8006CF6E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YRZV9MTWPP;
 				INFOPLIST_FILE = YourAdsSDKTests/Info.plist;
@@ -407,6 +432,7 @@
 		CD16CFFE215E13F8006CF6E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YRZV9MTWPP;
 				INFOPLIST_FILE = YourAdsSDKTests/Info.plist;
