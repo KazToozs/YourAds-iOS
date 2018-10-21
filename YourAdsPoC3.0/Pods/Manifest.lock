@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (4.7.3)
+  - YourAdsSDK (0.0.1):
+    - Alamofire
+
+DEPENDENCIES:
+  - Alamofire
+  - YourAdsSDK (from `../YourAdsSDK`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  YourAdsSDK:
+    :path: "../YourAdsSDK"
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  YourAdsSDK: 806cb4db60b1034a8596e9aab955018c77996fd6
+
+PODFILE CHECKSUM: dd71e69ef929024b5ddf6323707d33ba2ef2bc4a
+
+COCOAPODS: 1.5.3

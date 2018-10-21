@@ -1,20 +1,15 @@
 //
-//  YourAdsSDKTests.swift
-//  YourAdsSDKTests
+//  YourAdsPoC3_0Tests.swift
+//  YourAdsPoC3.0Tests
 //
-<<<<<<< HEAD
-//  Created by Cris Toozs on 19/11/2017.
-//  Copyright © 2017 Cris Toozs. All rights reserved.
-=======
 //  Created by Cris Toozs on 28/09/2018.
 //  Copyright © 2018 Cris Toozs. All rights reserved.
->>>>>>> PoC 3.0 start
 //
 
 import XCTest
-@testable import YourAdsSDK
+@testable import YourAdsPoC3_0
 
-class YourAdsSDKTests: XCTestCase {
+class YourAdsPoC3_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()

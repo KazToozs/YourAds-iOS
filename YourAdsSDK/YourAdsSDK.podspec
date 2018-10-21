@@ -17,14 +17,22 @@ Pod::Spec.new do |s|
 
   s.name         = "YourAdsSDK"
   s.version      = "0.0.1"
+<<<<<<< HEAD
   s.summary      = "A short description of YourAdsSDK."
+=======
+  s.summary      = "My description of YourAdsSDK"
+>>>>>>> PoC 3.0 start
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
+<<<<<<< HEAD
   s.description  = "YourAds description"
+=======
+  s.description  = "Description la dee daa"
+>>>>>>> PoC 3.0 start
 
   s.homepage     = "http://EXAMPLE/YourAdsSDK"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -131,6 +139,11 @@ Pod::Spec.new do |s|
   # s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+<<<<<<< HEAD
    s.dependency "Alamofire"
+=======
+  # s.dependency "JSONKit", "~> 1.4"
+  s.dependency "Alamofire"
+>>>>>>> PoC 3.0 start
 
 end

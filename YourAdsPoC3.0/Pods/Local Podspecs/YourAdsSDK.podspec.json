@@ -1,0 +1,28 @@
+{
+  "name": "YourAdsSDK",
+  "version": "0.0.1",
+  "summary": "My description of YourAdsSDK",
+  "description": "Description la dee daa",
+  "homepage": "http://EXAMPLE/YourAdsSDK",
+  "license": "MIT",
+  "authors": {
+    "Cris Toozs": "cris.hobson@hotmail.com"
+  },
+  "platforms": {
+    "ios": null
+  },
+  "source": {
+    "git": "https://github.com/yourAds/POC-IOS-demo.git",
+    "tag": "0.0.1"
+  },
+  "source_files": [
+    "YourAdsSDK",
+    "YourAdsSDK/**/*.{h,m}"
+  ],
+  "exclude_files": "YourAdsSDK/Exclude",
+  "dependencies": {
+    "Alamofire": [
+
+    ]
+  }
+}
