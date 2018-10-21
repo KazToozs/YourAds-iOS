@@ -1,1 +1,0 @@
-../../../../../YourAdsSDK/YourAdsSDK/YourAdsSDK.h
