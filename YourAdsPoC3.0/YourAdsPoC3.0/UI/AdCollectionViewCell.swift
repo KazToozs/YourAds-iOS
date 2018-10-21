@@ -9,8 +9,6 @@
 import UIKit
 
 class AdCollectionViewCell: UICollectionViewCell {
-
-    let nibName = "AdCollectionViewCell"
-    @IBOutlet weak var thumbnailImage: UIImageView!
+    @IBOutlet weak var adName: UILabel!
     
 }

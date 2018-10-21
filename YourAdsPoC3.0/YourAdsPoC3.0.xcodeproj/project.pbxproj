@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AA31FE9217CE8C200CD43A9 /* AdCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA31FE8217CE8C200CD43A9 /* AdCollectionViewCell.xib */; };
 		4ED94CDC11B1FFEBD2A5BF36 /* Pods_YourAdsPoC3_0UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94F9222532475C16C5087FD /* Pods_YourAdsPoC3_0UITests.framework */; };
 		84F14B18FAA1FC41082B30FD /* Pods_YourAdsPoC3_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6408332C72054F1E24DA80 /* Pods_YourAdsPoC3_0.framework */; };
 		CBFF75F667754D06688C15F8 /* Pods_YourAdsPoC3_0Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D443B9ADD39C554146040EBC /* Pods_YourAdsPoC3_0Tests.framework */; };
@@ -19,7 +20,6 @@
 		CD16CFC3215E117B006CF6E7 /* YourAdsPoC3_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16CFC2215E117B006CF6E7 /* YourAdsPoC3_0Tests.swift */; };
 		CD16CFCE215E117B006CF6E7 /* YourAdsPoC3_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16CFCD215E117B006CF6E7 /* YourAdsPoC3_0UITests.swift */; };
 		CD403DBC215FE8CC0033E519 /* AdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD403DBA215FE8CC0033E519 /* AdCollectionViewCell.swift */; };
-		CD403DBD215FE8CC0033E519 /* AdCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD403DBB215FE8CC0033E519 /* AdCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AA31FE8217CE8C200CD43A9 /* AdCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdCollectionViewCell.xib; sourceTree = "<group>"; };
 		1A6408332C72054F1E24DA80 /* Pods_YourAdsPoC3_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourAdsPoC3_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2113CB1DBB57C8F9AF08157B /* Pods-YourAdsPoC3.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourAdsPoC3.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YourAdsPoC3.0UITests/Pods-YourAdsPoC3.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		7BA121CD102D62241407336D /* Pods-YourAdsPoC3.0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourAdsPoC3.0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YourAdsPoC3.0Tests/Pods-YourAdsPoC3.0Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		CD16CFCD215E117B006CF6E7 /* YourAdsPoC3_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourAdsPoC3_0UITests.swift; sourceTree = "<group>"; };
 		CD16CFCF215E117B006CF6E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD403DBA215FE8CC0033E519 /* AdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCollectionViewCell.swift; sourceTree = "<group>"; };
-		CD403DBB215FE8CC0033E519 /* AdCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdCollectionViewCell.xib; sourceTree = "<group>"; };
 		D443B9ADD39C554146040EBC /* Pods_YourAdsPoC3_0Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourAdsPoC3_0Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94F9222532475C16C5087FD /* Pods_YourAdsPoC3_0UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourAdsPoC3_0UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -196,8 +196,8 @@
 		CD403DB9215FE7220033E519 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0AA31FE8217CE8C200CD43A9 /* AdCollectionViewCell.xib */,
 				CD403DBA215FE8CC0033E519 /* AdCollectionViewCell.swift */,
-				CD403DBB215FE8CC0033E519 /* AdCollectionViewCell.xib */,
 				CD16CFB6215E117A006CF6E7 /* LaunchScreen.storyboard */,
 				CD16CFAE215E1178006CF6E7 /* Main.storyboard */,
 			);
@@ -323,8 +323,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD16CFB8215E117A006CF6E7 /* LaunchScreen.storyboard in Resources */,
+				0AA31FE9217CE8C200CD43A9 /* AdCollectionViewCell.xib in Resources */,
 				CD16CFB5215E117A006CF6E7 /* Assets.xcassets in Resources */,
-				CD403DBD215FE8CC0033E519 /* AdCollectionViewCell.xib in Resources */,
 				CD16CFB0215E1178006CF6E7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

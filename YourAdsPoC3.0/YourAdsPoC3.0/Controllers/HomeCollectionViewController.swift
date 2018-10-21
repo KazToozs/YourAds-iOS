@@ -12,14 +12,14 @@ import YourAdsSDK
 
 class HomeCollectionViewController: UICollectionViewController {
     
-    @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet var homeCollectionView: UICollectionView!
     let yourAdsHelper: YourAdsHelper
-    var videoJSONArray: [NSDictionary]?
+    var videoJSONArray: [NSDictionary]
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
         yourAdsHelper = YourAdsHelper()
+        videoJSONArray = [NSDictionary]()
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let value = videoJSONArray?.count ?? 0
+        let value = self.videoJSONArray.count
         if (value <= 0) {
             // Action when no videos are found
             print ("No videos found")
@@ -46,8 +46,9 @@ class HomeCollectionViewController: UICollectionViewController {
     
     // Definition of the cells that populate the view for each item counted above in numberOfItemsInSection
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdCollectionViewCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdCollectionViewCell", for: indexPath) as! AdCollectionViewCell
         
+        cell.adName.text = videoJSONArray[indexPath.item]["name"] as! String
         
         return cell
     }
@@ -60,7 +61,37 @@ class HomeCollectionViewController: UICollectionViewController {
             return
         }
         
+        let headers: HTTPHeaders = [
+            "PhoneIdentifiers" : yourAdsHelper.advertisingId,
+            "type" : "iOS"
+        ]
         
+        self.videoJSONArray.removeAll()
+        
+        Alamofire.request(url,
+                          headers: headers)
+            .responseJSON { response in
+                print(response)
+                print("status: \(String(describing: response.response?.statusCode))")
+                //to get status code
+                if let status = response.response?.statusCode {
+                    switch(status){
+                    case 200:
+                        print("example success")
+                    default:
+                        print("error with response status: \(status)")
+                    }
+                }
+                //to get JSON return value
+                if let results = response.result.value as? [Any] {
+                    for result in results {
+                        let JSON = result as! NSDictionary
+                        self.videoJSONArray.append(JSON)
+                        print (self.videoJSONArray.count)
+                    }
+                }
+                self.collectionView?.reloadData()
+        }
         
     }
 }

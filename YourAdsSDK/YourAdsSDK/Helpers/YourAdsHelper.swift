@@ -11,7 +11,7 @@ import Alamofire
 
 public class YourAdsHelper {
     
-    var advertisingId : String
+    public var advertisingId : String
     public let serverAddress = "http://yourads.ovh"
     // Recovered video information
     public var videoId : String?

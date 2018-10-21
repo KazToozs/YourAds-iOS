@@ -10,11 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeCollectionViewController" customModule="YourAdsPoC3_0" customModuleProvider="target">
-            <connections>
-                <outlet property="thumbnailImage" destination="qHi-Fu-v13" id="a3O-B1-lOV"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeCollectionViewController" customModule="YourAdsPoC3_0" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AdCollectionViewCell" customModule="YourAdsPoC3_0" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -23,13 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qHi-Fu-v13">
-                        <rect key="frame" x="20" y="12" width="335" height="145"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="145" id="8dg-oE-c32"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1x-cw-7XI">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1x-cw-7XI">
                         <rect key="frame" x="166.5" y="169" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -39,16 +29,12 @@
             </view>
             <color key="backgroundColor" red="0.97948423799999995" green="1" blue="0.28516566259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="m1x-cw-7XI" firstAttribute="top" secondItem="qHi-Fu-v13" secondAttribute="bottom" constant="12" id="Pe3-ML-kpc"/>
                 <constraint firstItem="m1x-cw-7XI" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="TJp-im-4Mk"/>
-                <constraint firstItem="qHi-Fu-v13" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="12" id="YQf-D2-1Y3"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="qHi-Fu-v13" secondAttribute="trailing" constant="20" id="niK-D7-E3v"/>
-                <constraint firstItem="qHi-Fu-v13" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="20" id="uQc-II-N3S"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="109" height="99"/>
             <connections>
-                <outlet property="thumbnailImage" destination="qHi-Fu-v13" id="RSE-es-O0E"/>
+                <outlet property="adName" destination="m1x-cw-7XI" id="XtB-A8-roM"/>
             </connections>
             <point key="canvasLocation" x="63.5" y="78"/>
         </collectionViewCell>
