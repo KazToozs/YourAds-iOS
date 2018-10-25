@@ -19,24 +19,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1x-cw-7XI">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1x-cw-7XI">
                         <rect key="frame" x="166.5" y="169" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="1" green="0.27898726340000002" blue="0.068082152519999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zzb-5S-fZK" userLabel="Thumbnail Image">
+                        <rect key="frame" x="43" y="6" width="288" height="157"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.97948423799999995" green="1" blue="0.28516566259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="m1x-cw-7XI" secondAttribute="bottom" constant="10" id="T1x-WT-JUv"/>
                 <constraint firstItem="m1x-cw-7XI" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="TJp-im-4Mk"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="109" height="99"/>
             <connections>
                 <outlet property="adName" destination="m1x-cw-7XI" id="XtB-A8-roM"/>
+                <outlet property="thumbnailImage" destination="zzb-5S-fZK" id="Kgi-7I-IhR"/>
             </connections>
-            <point key="canvasLocation" x="63.5" y="78"/>
+            <point key="canvasLocation" x="63.200000000000003" y="77.361319340329842"/>
         </collectionViewCell>
     </objects>
 </document>

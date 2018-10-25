@@ -80,36 +80,5 @@ public class YourAdsHelper {
                     
                 }
     }
-    
-    /*
-     ** When called, sets up a view with the advertiser player and frontal camera video output.
-     */
-//    public func launchYourAdsAdvertisement(viewController: UIViewController, videoCapturer: VideoCapture) {
-//        let videoLauncher = VideoLauncher()
-//        let myView = UIView()
-//
-//        let value = UIInterfaceOrientation.portrait.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-//
-//        videoLauncher.showVideoPlayer(videoHelper: self)
-//        videoCapturer.setVideoPlayerView(videoPlayerView: videoLauncher.videoPlayerView!)
-//
-//        if let keyWindow = UIApplication.shared.keyWindow {
-//
-//            myView.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
-//                                  y: 0,
-//                                  width: keyWindow.frame.width / 3,
-//                                  height: keyWindow.frame.height / 3)
-//
-//            keyWindow.addSubview(myView)
-//
-//            viewController.view = UIApplication.shared.keyWindow
-//            do {
-//                try videoCapturer.startCapturing(previewView: myView)
-//            }
-//            catch {
-//            }
-//        }
-//    }
-    
+
 }

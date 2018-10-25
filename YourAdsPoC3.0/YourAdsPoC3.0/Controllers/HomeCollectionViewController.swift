@@ -15,8 +15,15 @@ class HomeCollectionViewController: UICollectionViewController {
     @IBOutlet var homeCollectionView: UICollectionView!
     let yourAdsHelper: YourAdsHelper
     var videoJSONArray: [NSDictionary]
+    var selectedIndex: Int?
+   
+    
+    // ----- VIEW CONTROLLER METHODS -----
     
     required init?(coder aDecoder: NSCoder) {
+        // set device orientation to portrait
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        
         yourAdsHelper = YourAdsHelper()
         videoJSONArray = [NSDictionary]()
         super.init(coder: aDecoder)
@@ -34,6 +41,19 @@ class HomeCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destinationViewController = segue.destination as? YourAdsController  {//Cast with your DestinationController
+            //Now simply set the title property of vc
+            destinationViewController.yourAdsHelper = yourAdsHelper
+            destinationViewController.advertisementFilename = (videoJSONArray[selectedIndex!]["filename"] as! String)
+            destinationViewController.advertisementId = (videoJSONArray[selectedIndex!]["id"] as! Int)
+        }
+    }
+    
+    
+    // ----- COLLECTION VIEW METHODS -----
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let value = self.videoJSONArray.count
@@ -46,12 +66,29 @@ class HomeCollectionViewController: UICollectionViewController {
     
     // Definition of the cells that populate the view for each item counted above in numberOfItemsInSection
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let thumbnail = videoJSONArray[indexPath.item]["thumbnailfilename"] as! String
+        let id = videoJSONArray[indexPath.item]["id"] as! Int
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdCollectionViewCell", for: indexPath) as! AdCollectionViewCell
         
-        cell.adName.text = videoJSONArray[indexPath.item]["name"] as! String
-        
+        cell.adName.text = (videoJSONArray[indexPath.item]["name"] as! String)
+        cell.thumbnailImage.downloaded(from: yourAdsHelper.serverAddress
+                                        + "/api/video/file/"
+                                        + String(id) + "/" + thumbnail)
+
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let destinationViewController = YourAdsController()
+//        destinationViewController.yourAdsHelper = yourAdsHelper
+//        destinationViewController.advertisementFilename = (videoJSONArray[indexPath.item]["thumbnailfilename"] as! String)
+//        destinationViewController.advertisementId = (videoJSONArray[indexPath.item]["id"] as! Int)
+        selectedIndex = indexPath.item
+        self.performSegue(withIdentifier: "segueToPlayer", sender: self)
+    }
+    
+    
+    // ----- PERSONAL METHODS -----
     
     private func loadVideoListFromServer() {
         //        var token = "Bearer JGYMkqcLBLjE9hGvmuqfjlgVgph8IO6uQkDK7hgYRYvNRTx7PgVC9kmUVQJPY5wdP3qECpNJiOWq4UsyJ41RLCYLojvhP8hS1yDqeyQNPCbqpo2tcxll4wKswnToQeio1totg0Xk9y2rPLRUEQvGg3LH1llVV449UtA9ole5Kp26HNFnkenXN4niDqucxBN06u9ssFlPEajVRukKmYAMemXplEq2eByvyxdREtM9dNTRt8crvHvDHaX4TaimQhEc"

@@ -20,6 +20,7 @@
 		CD16CFC3215E117B006CF6E7 /* YourAdsPoC3_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16CFC2215E117B006CF6E7 /* YourAdsPoC3_0Tests.swift */; };
 		CD16CFCE215E117B006CF6E7 /* YourAdsPoC3_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16CFCD215E117B006CF6E7 /* YourAdsPoC3_0UITests.swift */; };
 		CD403DBC215FE8CC0033E519 /* AdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD403DBA215FE8CC0033E519 /* AdCollectionViewCell.swift */; };
+		CDC9282E218276A3005DB6AD /* HeartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC9282D218276A2005DB6AD /* HeartView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		CD16CFCD215E117B006CF6E7 /* YourAdsPoC3_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourAdsPoC3_0UITests.swift; sourceTree = "<group>"; };
 		CD16CFCF215E117B006CF6E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD403DBA215FE8CC0033E519 /* AdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCollectionViewCell.swift; sourceTree = "<group>"; };
+		CDC9282D218276A2005DB6AD /* HeartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeartView.xib; sourceTree = "<group>"; };
 		D443B9ADD39C554146040EBC /* Pods_YourAdsPoC3_0Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourAdsPoC3_0Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94F9222532475C16C5087FD /* Pods_YourAdsPoC3_0UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourAdsPoC3_0UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -133,6 +135,7 @@
 		CD16CFA9215E1178006CF6E7 /* YourAdsPoC3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				CDC9282D218276A2005DB6AD /* HeartView.xib */,
 				CD403DB8215FE7220033E519 /* Resources */,
 				CD403DB9215FE7220033E519 /* UI */,
 				CD403DB6215FE6E90033E519 /* Controllers */,
@@ -326,6 +329,7 @@
 				0AA31FE9217CE8C200CD43A9 /* AdCollectionViewCell.xib in Resources */,
 				CD16CFB5215E117A006CF6E7 /* Assets.xcassets in Resources */,
 				CD16CFB0215E1178006CF6E7 /* Main.storyboard in Resources */,
+				CDC9282E218276A3005DB6AD /* HeartView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +608,7 @@
 			baseConfigurationReference = BDFB6BEC0B4CF9FEE661A58E /* Pods-YourAdsPoC3.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YRZV9MTWPP;
 				INFOPLIST_FILE = YourAdsPoC3.0/Info.plist;
@@ -613,6 +618,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "YourAds.YourAdsPoC3-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -623,6 +629,7 @@
 			baseConfigurationReference = A5CC83C6A4E32772DEC3A858 /* Pods-YourAdsPoC3.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YRZV9MTWPP;
 				INFOPLIST_FILE = YourAdsPoC3.0/Info.plist;
@@ -632,6 +639,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "YourAds.YourAdsPoC3-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
