@@ -20,6 +20,7 @@
     "YourAdsSDK/**/*.{h,m,swift}"
   ],
   "exclude_files": "YourAdsSDK/Exclude",
+  "resources": "YourAdsSDK/UI/YourAdsController.storyboard",
   "dependencies": {
     "Alamofire": [
 

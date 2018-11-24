@@ -12,6 +12,7 @@
 		CD16CFEF215E13F8006CF6E7 /* YourAdsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD16CFE5215E13F7006CF6E7 /* YourAdsSDK.framework */; };
 		CD16CFF4215E13F8006CF6E7 /* YourAdsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16CFF3215E13F8006CF6E7 /* YourAdsSDKTests.swift */; };
 		CD16CFF6215E13F8006CF6E7 /* YourAdsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD16CFE8215E13F7006CF6E7 /* YourAdsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD6CBF25218DB7DD00DCD6DC /* YourAdsController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6CBF24218DB7DD00DCD6DC /* YourAdsController.storyboard */; };
 		CDC9282B21826F37005DB6AD /* CameraRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9282921826F37005DB6AD /* CameraRecorder.swift */; };
 		CDC9282C21826F37005DB6AD /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9282A21826F37005DB6AD /* VideoPlayer.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		CD16CFEE215E13F8006CF6E7 /* YourAdsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YourAdsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD16CFF3215E13F8006CF6E7 /* YourAdsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourAdsSDKTests.swift; sourceTree = "<group>"; };
 		CD16CFF5215E13F8006CF6E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD6CBF24218DB7DD00DCD6DC /* YourAdsController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YourAdsController.storyboard; sourceTree = "<group>"; };
 		CDC9282921826F37005DB6AD /* CameraRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRecorder.swift; sourceTree = "<group>"; };
 		CDC9282A21826F37005DB6AD /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 		CD16CFE7215E13F7006CF6E7 /* YourAdsSDK */ = {
 			isa = PBXGroup;
 			children = (
+				CD6CBF23218DB7DD00DCD6DC /* UI */,
 				CDC9282321822EED005DB6AD /* Views */,
 				0AA31FE4217CDB0500CD43A9 /* Controllers */,
 				0AA31FE2217CDB0500CD43A9 /* Helpers */,
@@ -111,6 +114,14 @@
 				CD16CFF5215E13F8006CF6E7 /* Info.plist */,
 			);
 			path = YourAdsSDKTests;
+			sourceTree = "<group>";
+		};
+		CD6CBF23218DB7DD00DCD6DC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CD6CBF24218DB7DD00DCD6DC /* YourAdsController.storyboard */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		CDC9282321822EED005DB6AD /* Views */ = {
@@ -213,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD6CBF25218DB7DD00DCD6DC /* YourAdsController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,71 +9,118 @@ import UIKit
 import Foundation
 
 public class YourAdsController: UIViewController {
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var videoPlayerView: VideoPlayer!
     @IBOutlet weak var cameraRecorderView: UIView!
     public var yourAdsHelper: YourAdsHelper?
-    private var cameraRecorder: CameraRecorder?
-    public var advertisementId: Int?
+    public var cameraRecorder: CameraRecorder?
+    public var advertId: Int64?
     public var advertisementFilename: String?
+    public var previousStoryboardName: String?
+    public var previousControllerId: String?
+    
+    override public func loadView() {
+        super.loadView()
+        
+//                if (advertId == nil || advertisementFilename == nil) {
+//            yourAdsHelper?.loadRandomVideo(completion: { (videoId, videoFilename) in
+//                if (videoId != nil && videoFilename != nil) {
+//                    self.advertisementFilename = videoFilename
+//                    self.advertId = Int64(videoId!)
+//                    self.launchYourAdsAdvertisement()
+//                }
+//                else {
+//                    print("Random video load returns a nil value")
+//                }
+//            })
+//        }
+//                else {
+//                    self.launchYourAdsAdvertisement()
+//        }
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        
         cameraRecorder = CameraRecorder(videoToMonitor: videoPlayerView)
         // Do any additional setup after loading the view.
-        launchYourAdsAdvertisement()
+        if (advertId == nil || advertisementFilename == nil) {
+            yourAdsHelper?.loadRandomVideo(completion: { (videoId, videoFilename) in
+                if (videoId != nil && videoFilename != nil) {
+                    self.launchYourAdsAdvertisement()
+                }
+                else {
+                    print("Random video load returns a nil value")
+
+                }
+            })
+        }
+        else {
+            self.launchYourAdsAdvertisement()
+        }
+    }
+    
+    override public func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        cameraRecorder?.input = nil
+            cameraRecorder?.device = nil
+            cameraRecorder?.session = nil
+            cameraRecorder?.dataOutput = nil
+        cameraRecorder?.dataOutputQueue = nil
+        cameraRecorder?.videoToMonitor = nil
+        cameraRecorder = nil
+        if (videoPlayerView.player != nil) {
+            videoPlayerView.player?.replaceCurrentItem(with: nil)
+            videoPlayerView.player = nil
+        }
+        advertId = nil
+        advertisementFilename = nil
     }
 
+    @objc func backButtonAction() {
+        let skipped = true
+        let nbPauses = cameraRecorder?.nbPauses
+        let videoId = advertId!
+        let videoItem = videoPlayerView.player?.currentItem
+        let timeSkipped = Int64((videoItem?.currentTime().seconds)!)
+        let phoneId = yourAdsHelper!.phoneId
+        
+        var attention = cameraRecorder!.attention
+        var currentDateTime: Date?
+        let maxFaces = cameraRecorder?.maxFaces
+        let modelName = yourAdsHelper?.modelName
+        let timeZone = yourAdsHelper?.timeZone
+        
+        yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, timeZone: timeZone!, modelName: modelName!, attention: attention)
+        returnToPreviousStoryboard()
+    }
+    
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    public func returnToPreviousStoryboard() {
+//        let storyboard = UIStoryboard(name: self.previousStoryboardName!, bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: self.previousControllerId!) as! UICollectionViewController
+//        self.present(vc, animated: true, completion: nil)
+//
+//        self.navigationController?
+//            .popViewController(animated: true)
+        
+        self.dismiss(animated: true, completion: nil)
     }
-    */
-
-//    public func launchYourAdsAdvertisement(viewController: UIViewController, videoCapturer: VideoCapture) {
-//        let videoLauncher = VideoLauncher()
-//        let myView = UIView()
-//        
-//        let value = UIInterfaceOrientation.portrait.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-//        
-//        videoLauncher.showVideoPlayer(videoHelper: self)
-//        videoCapturer.setVideoPlayerView(videoPlayerView: videoLauncher.videoPlayerView!)
-//        
-//        if let keyWindow = UIApplication.shared.keyWindow {
-//            
-//            myView.frame = CGRect(x: keyWindow.frame.width / 2 - (keyWindow.frame.width / 3 / 2),
-//                                  y: 0,
-//                                  width: keyWindow.frame.width / 3,
-//                                  height: keyWindow.frame.height / 3)
-//            
-//            keyWindow.addSubview(myView)
-//            
-//            viewController.view = UIApplication.shared.keyWindow
-//            do {
-//                try videoCapturer.startCapturing(previewView: myView)
-//            }
-//            catch {
-//            }
-//        }
-//    }
-    
+      
     public func launchYourAdsAdvertisement()
     {
         var url = URL(string: "http://yourads.ovh")
-        url = url?.appendingPathComponent("/api/video/file/" + String(advertisementId!) + "/" + advertisementFilename!)
+        url = url?.appendingPathComponent("/api/video/file/" + String(advertId!) + "/" + advertisementFilename!)
         
-        videoPlayerView.playVideo(url: url!)
+        videoPlayerView.setVideoForPlayback(url: url!)
+        videoPlayerView.addBackButtonBoundaryTimeObserver(button: backButton)
+        videoPlayerView.addEndTimeObserver(controller: self)
+        videoPlayerView.playVideo()
         do {
             try cameraRecorder?.startCapturing(previewView: cameraRecorderView)
         }

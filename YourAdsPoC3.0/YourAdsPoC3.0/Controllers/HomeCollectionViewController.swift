@@ -11,7 +11,7 @@ import Alamofire
 import YourAdsSDK
 
 class HomeCollectionViewController: UICollectionViewController {
-    
+
     @IBOutlet var homeCollectionView: UICollectionView!
     let yourAdsHelper: YourAdsHelper
     var videoJSONArray: [NSDictionary]
@@ -44,12 +44,27 @@ class HomeCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let destinationViewController = segue.destination as? YourAdsController  {//Cast with your DestinationController
-            //Now simply set the title property of vc
-            destinationViewController.yourAdsHelper = yourAdsHelper
-            destinationViewController.advertisementFilename = (videoJSONArray[selectedIndex!]["filename"] as! String)
-            destinationViewController.advertisementId = (videoJSONArray[selectedIndex!]["id"] as! Int)
-        }
+//        if let navVC = segue.destination as? UINavigationController  {
+//        if let destinationViewController = navVC.viewControllers.first as? YourAdsController {
+
+            if let destinationViewController = segue.destination as? YourAdsController {
+
+                if (segue.identifier == "segueToPlayer") {
+                    destinationViewController.yourAdsHelper = yourAdsHelper
+                    destinationViewController.advertisementFilename = (videoJSONArray[selectedIndex!]["videoFilename"] as! String)
+                    destinationViewController.advertId = (videoJSONArray[selectedIndex!]["id"] as! Int64)
+                    destinationViewController.previousStoryboardName = "Main"
+                    destinationViewController.previousControllerId = "HomeController"
+                }
+                else if (segue.identifier == "segueButton") {
+                    destinationViewController.yourAdsHelper = yourAdsHelper
+    //                destinationViewController.advertisementFilename = "temp"
+    //                destinationViewController.advertId = 9
+                    destinationViewController.previousStoryboardName = "Main"
+                    destinationViewController.previousControllerId = "HomeController"
+                }
+            }
+//        }
     }
     
     
@@ -66,41 +81,40 @@ class HomeCollectionViewController: UICollectionViewController {
     
     // Definition of the cells that populate the view for each item counted above in numberOfItemsInSection
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let thumbnail = videoJSONArray[indexPath.item]["thumbnailfilename"] as! String
+        let thumbnail = videoJSONArray[indexPath.item]["thumbnailFilename"] as! String
         let id = videoJSONArray[indexPath.item]["id"] as! Int
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdCollectionViewCell", for: indexPath) as! AdCollectionViewCell
         
-        cell.adName.text = (videoJSONArray[indexPath.item]["name"] as! String)
-        cell.thumbnailImage.downloaded(from: yourAdsHelper.serverAddress
-                                        + "/api/video/file/"
-                                        + String(id) + "/" + thumbnail)
+        cell.adName.text = (videoJSONArray[indexPath.item]["videoName"] as! String)
+//        cell.thumbnailImage.downloaded(from: yourAdsHelper.serverAddress
+//                                        + "/api/video/file/"
+//                                        + String(id) + "/" + thumbnail)
+        
+        var url = URL(string: "http://yourads.ovh")
+        url = url?.appendingPathComponent("/api/video/file/" + String(id) + "/" + thumbnail)
+        cell.thumbnailImage.downloaded(from: url!)
 
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let destinationViewController = YourAdsController()
-//        destinationViewController.yourAdsHelper = yourAdsHelper
-//        destinationViewController.advertisementFilename = (videoJSONArray[indexPath.item]["thumbnailfilename"] as! String)
-//        destinationViewController.advertisementId = (videoJSONArray[indexPath.item]["id"] as! Int)
         selectedIndex = indexPath.item
-        self.performSegue(withIdentifier: "segueToPlayer", sender: self)
+            self.performSegue(withIdentifier: "segueToPlayer", sender: self)
     }
     
     
     // ----- PERSONAL METHODS -----
     
     private func loadVideoListFromServer() {
-        //        var token = "Bearer JGYMkqcLBLjE9hGvmuqfjlgVgph8IO6uQkDK7hgYRYvNRTx7PgVC9kmUVQJPY5wdP3qECpNJiOWq4UsyJ41RLCYLojvhP8hS1yDqeyQNPCbqpo2tcxll4wKswnToQeio1totg0Xk9y2rPLRUEQvGg3LH1llVV449UtA9ole5Kp26HNFnkenXN4niDqucxBN06u9ssFlPEajVRukKmYAMemXplEq2eByvyxdREtM9dNTRt8crvHvDHaX4TaimQhEc"
-        
         guard let url = URL(string: yourAdsHelper.serverAddress + "/api/video/listAvailableVideo") else
         {
             return
         }
         
         let headers: HTTPHeaders = [
-            "PhoneIdentifiers" : yourAdsHelper.advertisingId,
-            "type" : "iOS"
+            "PhoneIdentifiers" : yourAdsHelper.phoneId,
+            "type" : "iOS",
+            "model" : yourAdsHelper.modelName
         ]
         
         self.videoJSONArray.removeAll()

@@ -27,6 +27,14 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     var previewView: UIView?
     var videoToMonitor: VideoPlayer?
     
+    var nbPauses: Int = 0
+    var skipped: Bool = false
+    var skippedTime: CMTime?
+    var maxFaces = 0
+    var attention: [Attention] = []
+    
+    var faceFeatureCount = 0
+    
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
         case InputDeviceNotAvailable
@@ -95,7 +103,6 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     
     private func setDeviceInput() throws {
         do {
-            //            self.input = try AVCaptureDeviceInput(device: self.device!.devices.first!)
             self.input = try AVCaptureDeviceInput(device: self.device!)
         }
         catch {
@@ -128,17 +135,6 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     
     
     class VideoCaptureDevice {
-        
-        //        static func create() -> AVCaptureDevice.DiscoverySession {
-        //            let device = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.front)
-        //
-        //            return device
-        //
-        //        }
-        
-        /*
-         **     Commented code here is functional code from Swift 2 - 3
-         */
         static func create() -> AVCaptureDevice {
             var device: AVCaptureDevice?
             
@@ -165,23 +161,43 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         let image = getImageFromBuffer(buffer: sampleBuffer)
         let features = getFacialFeaturesFromImage(image: image)
         let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
-        let cleanAperture = CMVideoFormatDescriptionGetCleanAperture(formatDescription!, false)
+        let cleanAperture = CMVideoFormatDescriptionGetCleanAperture(formatDescription!, originIsAtTopLeft: false)
         
         if (features.isEmpty) {
             isWatching = false
             if (videoToMonitor?.isPlaying == true) {
-                videoToMonitor?.handlePause()
+//                videoToMonitor?.handlePause()
+                let currentTime = videoToMonitor?.player?.currentItem?.currentTime()
+                self.nbPauses += 1
+                faceFeatureCount = 0
+                let changedAttention = Attention(nbPerson: 0, timestamp: (currentTime?.seconds)!)
+                attention.append(changedAttention)
             }
         }
         else {
+            var currentFaceFeatureCount = 0
+            for feature in features {
+                if ((feature as? CIFaceFeature) != nil) {
+                    currentFaceFeatureCount += 1
+                }
+            }
             isWatching = true
             if (videoToMonitor?.isPlaying == false) {
                 videoToMonitor?.handlePause()
+                let currentTime = videoToMonitor?.player?.currentItem?.currentTime()
+                let changedAttention = Attention(nbPerson: currentFaceFeatureCount, timestamp: (currentTime?.seconds)!)
+                attention.append(changedAttention)
             }
+            else if (currentFaceFeatureCount > faceFeatureCount) {
+                let currentTime = videoToMonitor?.player?.currentItem?.currentTime()
+                let changedAttention = Attention(nbPerson: currentFaceFeatureCount, timestamp: (currentTime?.seconds)!)
+                attention.append(changedAttention)
+            }
+            faceFeatureCount = currentFaceFeatureCount
         }
-        DispatchQueue.main.async() {
-            self.alterPreview(features: features, cleanAperture: cleanAperture)
-        }
+//        DispatchQueue.main.async() {
+//            self.alterPreview(features: features, cleanAperture: cleanAperture)
+//        }
     }
     
     public func getIsWatching() -> Bool {
@@ -190,8 +206,8 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     
     private func getImageFromBuffer(buffer: CMSampleBuffer) -> CIImage {
         let pixelBuffer = CMSampleBufferGetImageBuffer(buffer)
-        let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, buffer, kCMAttachmentMode_ShouldPropagate)
-        let cameraImage = CIImage(cvPixelBuffer: pixelBuffer!, options: attachments as? [String : Any])
+        let attachments = CMCopyDictionaryOfAttachments(allocator: kCFAllocatorDefault, target: buffer, attachmentMode: kCMAttachmentMode_ShouldPropagate)
+        let cameraImage = CIImage(cvPixelBuffer: pixelBuffer!, options: convertToOptionalCIImageOptionDictionary(attachments as? [String : Any]))
         
         return cameraImage
     }
@@ -205,6 +221,8 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     }
     
     private func alterPreview(features: [CIFeature], cleanAperture: CGRect) {
+        var faceFeatureCount = 0
+        
         removeFeatureViews()
         
         if (features.count == 0 || cleanAperture == CGRect.zero) {
@@ -212,19 +230,30 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         }
         
         for feature in features {
-            let faceFeature = feature as? CIFaceFeature
-            
-            if (faceFeature!.hasLeftEyePosition) {
+            if let faceFeature = (feature as? CIFaceFeature) {
+                faceFeatureCount += 1
                 
-                addEyeViewToPreview(xPosition: faceFeature!.leftEyePosition.x,
-                                    yPosition: faceFeature!.leftEyePosition.y, cleanAperture: cleanAperture)
+//                let faceBox = UIView(frame: faceFeature.bounds)
+//
+//                faceBox.layer.borderWidth = 3
+//                faceBox.layer.borderColor = UIColor.red.cgColor
+//                faceBox.backgroundColor = UIColor.clear
+//                preview?.addSubview(faceBox)//
+                if (faceFeature.hasLeftEyePosition) {
+
+                    addEyeViewToPreview(xPosition: faceFeature.leftEyePosition.x,
+                                        yPosition: faceFeature.leftEyePosition.y, cleanAperture: cleanAperture)
+                }
+                if (faceFeature.hasRightEyePosition) {
+
+                    addEyeViewToPreview(xPosition: faceFeature.rightEyePosition.x,
+                                        yPosition: faceFeature.rightEyePosition.y, cleanAperture: cleanAperture)
+                }
             }
-            
-            if (faceFeature!.hasRightEyePosition) {
-                
-                addEyeViewToPreview(xPosition: faceFeature!.rightEyePosition.x,
-                                    yPosition: faceFeature!.rightEyePosition.y, cleanAperture: cleanAperture)
-            }
+        }
+        if (faceFeatureCount > maxFaces)
+        {
+            self.maxFaces = faceFeatureCount
         }
     }
     
@@ -238,13 +267,22 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         }
     }
     
-    private func getFeatureView() -> UIView {
+    private func getHeartFeatureView() -> UIView {
         let heartView = Bundle.main.loadNibNamed("HeartView", owner: self, options: nil)?[0] as! UIView
         heartView.backgroundColor = UIColor.clear
         heartView.layer.removeAllAnimations()
         heartView.tag = 1001
         
         return heartView
+    }
+    
+    private func getSquareFeatureView() -> UIView {
+        let squareView = UIView()
+        squareView.backgroundColor = UIColor.clear
+        squareView.layer.removeAllAnimations()
+        squareView.tag = 1001
+        
+        return squareView
     }
     
     private func transformFacialFeaturePosition(xPosition: CGFloat, yPosition: CGFloat,
@@ -270,8 +308,24 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         return featureRect
     }
     
+    private func addFaceSquareToPreview(xPosition: CGFloat, yPosition: CGFloat, cleanAperture: CGRect) {
+        let squareView = getSquareFeatureView()
+        let isMirrored = preview!.contentsAreFlipped()
+        let previewBox = preview!.frame
+        
+        previewView!.addSubview(squareView)
+        
+        var boxFrame = transformFacialFeaturePosition(xPosition: xPosition, yPosition: yPosition,
+                                                      videoRect: cleanAperture, previewRect: previewBox, isMirrored: isMirrored)
+        
+        boxFrame.origin.x -= 37
+        boxFrame.origin.y -= 37
+        
+        squareView.frame = boxFrame
+    }
+    
     private func addEyeViewToPreview(xPosition: CGFloat, yPosition: CGFloat, cleanAperture: CGRect) {
-        let eyeView = getFeatureView()
+        let eyeView = getHeartFeatureView()
         let isMirrored = preview!.contentsAreFlipped()
         let previewBox = preview!.frame
         
@@ -292,6 +346,7 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         var detector: CIDetector?
         var options: [String : AnyObject]?
         var context: CIContext?
+        var maxFaces: Int = 0
         
         init() {
             context = CIContext()
@@ -307,4 +362,10 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         }
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalCIImageOptionDictionary(_ input: [String: Any]?) -> [CIImageOption: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (CIImageOption(rawValue: key), value)})
 }
