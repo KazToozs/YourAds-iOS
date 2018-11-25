@@ -25,11 +25,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rkx-Z0-zD3">
-                                <rect key="frame" x="250" y="451" width="125" height="216"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osD-CS-PDe">
                                 <rect key="frame" x="319" y="64" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
@@ -44,7 +39,6 @@
                     <navigationItem key="navigationItem" id="iGL-as-MFI"/>
                     <connections>
                         <outlet property="backButton" destination="osD-CS-PDe" id="Etw-SM-gUA"/>
-                        <outlet property="cameraRecorderView" destination="Rkx-Z0-zD3" id="qxf-rb-9Ar"/>
                         <outlet property="videoPlayerView" destination="JZZ-U1-Qp9" id="Hty-lI-MpR"/>
                     </connections>
                 </viewController>

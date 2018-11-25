@@ -11,7 +11,6 @@ import Foundation
 public class YourAdsController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var videoPlayerView: VideoPlayer!
-    @IBOutlet weak var cameraRecorderView: UIView!
     public var yourAdsHelper: YourAdsHelper?
     public var cameraRecorder: CameraRecorder?
     public var advertId: Int64?
@@ -48,6 +47,9 @@ public class YourAdsController: UIViewController {
         if (advertId == nil || advertisementFilename == nil) {
             yourAdsHelper?.loadRandomVideo(completion: { (videoId, videoFilename) in
                 if (videoId != nil && videoFilename != nil) {
+                    let number: Int64? = Int64(videoId!)
+                    self.advertisementFilename = videoFilename
+                    self.advertId = number
                     self.launchYourAdsAdvertisement()
                 }
                 else {
@@ -122,7 +124,7 @@ public class YourAdsController: UIViewController {
         videoPlayerView.addEndTimeObserver(controller: self)
         videoPlayerView.playVideo()
         do {
-            try cameraRecorder?.startCapturing(previewView: cameraRecorderView)
+            try cameraRecorder?.startCapturing()
         }
         catch {
             print("problem")

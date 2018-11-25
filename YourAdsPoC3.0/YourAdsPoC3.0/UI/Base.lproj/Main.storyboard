@@ -46,7 +46,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2KP-Fk-AcH">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Any Ad"/>
                                 <connections>
                                     <segue destination="DaG-5a-BzD" kind="presentation" identifier="segueButton" id="4cl-RU-i2A"/>
                                 </connections>

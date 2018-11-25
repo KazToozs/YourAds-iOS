@@ -20,11 +20,9 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     var session: AVCaptureSession?
     var device: AVCaptureDevice?
     var input: AVCaptureInput?
-    var preview: CALayer?
     var faceDetector: FaceDetector?
     var dataOutput: AVCaptureVideoDataOutput?
     var dataOutputQueue: DispatchQueue?
-    var previewView: UIView?
     var videoToMonitor: VideoPlayer?
     
     var nbPauses: Int = 0
@@ -53,10 +51,9 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     /*
      ** Sets the live camera display to the given UIView with live face detection
      */
-    public func startCapturing(previewView: UIView) throws {
+    public func startCapturing() throws {
         isCapturing = true
         
-        self.previewView = previewView
         
         // setup the device for frontal camera live capture and output
         self.session = AVCaptureSession()
@@ -67,15 +64,7 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         try addDataOutputToSession()
         
         // set camera output to given view and start running
-        addPreviewToView(view: self.previewView!)
         session!.startRunning()
-    }
-    
-    private func addPreviewToView(view: UIView) {
-        self.preview = AVCaptureVideoPreviewLayer(session: session!)
-        self.preview!.frame = view.bounds
-        
-        view.layer.addSublayer(self.preview!)
     }
     
     private func setSessionPreset() throws {
@@ -143,14 +132,11 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
                     device = videoDevice as AVCaptureDevice
                 }
             }
-            
             if (nil == device) {
                 device = AVCaptureDevice.default(for: .video)
             }
-            
             return device!
         }
-        
     }
     
     
@@ -160,9 +146,7 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let image = getImageFromBuffer(buffer: sampleBuffer)
         let features = getFacialFeaturesFromImage(image: image)
-        let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
-        let cleanAperture = CMVideoFormatDescriptionGetCleanAperture(formatDescription!, originIsAtTopLeft: false)
-        
+
         if (features.isEmpty) {
             isWatching = false
             if (videoToMonitor?.isPlaying == true) {
@@ -195,9 +179,6 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
             }
             faceFeatureCount = currentFaceFeatureCount
         }
-//        DispatchQueue.main.async() {
-//            self.alterPreview(features: features, cleanAperture: cleanAperture)
-//        }
     }
     
     public func getIsWatching() -> Bool {
@@ -219,72 +200,7 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         return self.faceDetector!.getFacialFeaturesFromImage(image: image, options: imageOptions as [String : AnyObject])
         
     }
-    
-    private func alterPreview(features: [CIFeature], cleanAperture: CGRect) {
-        var faceFeatureCount = 0
-        
-        removeFeatureViews()
-        
-        if (features.count == 0 || cleanAperture == CGRect.zero) {
-            return
-        }
-        
-        for feature in features {
-            if let faceFeature = (feature as? CIFaceFeature) {
-                faceFeatureCount += 1
-                
-//                let faceBox = UIView(frame: faceFeature.bounds)
-//
-//                faceBox.layer.borderWidth = 3
-//                faceBox.layer.borderColor = UIColor.red.cgColor
-//                faceBox.backgroundColor = UIColor.clear
-//                preview?.addSubview(faceBox)//
-                if (faceFeature.hasLeftEyePosition) {
-
-                    addEyeViewToPreview(xPosition: faceFeature.leftEyePosition.x,
-                                        yPosition: faceFeature.leftEyePosition.y, cleanAperture: cleanAperture)
-                }
-                if (faceFeature.hasRightEyePosition) {
-
-                    addEyeViewToPreview(xPosition: faceFeature.rightEyePosition.x,
-                                        yPosition: faceFeature.rightEyePosition.y, cleanAperture: cleanAperture)
-                }
-            }
-        }
-        if (faceFeatureCount > maxFaces)
-        {
-            self.maxFaces = faceFeatureCount
-        }
-    }
-    
-    private func removeFeatureViews() {
-        if let pv = previewView {
-            for view in pv.subviews {
-                if (view.tag == 1001) {
-                    view.removeFromSuperview()
-                }
-            }
-        }
-    }
-    
-    private func getHeartFeatureView() -> UIView {
-        let heartView = Bundle.main.loadNibNamed("HeartView", owner: self, options: nil)?[0] as! UIView
-        heartView.backgroundColor = UIColor.clear
-        heartView.layer.removeAllAnimations()
-        heartView.tag = 1001
-        
-        return heartView
-    }
-    
-    private func getSquareFeatureView() -> UIView {
-        let squareView = UIView()
-        squareView.backgroundColor = UIColor.clear
-        squareView.layer.removeAllAnimations()
-        squareView.tag = 1001
-        
-        return squareView
-    }
-    
+  
     private func transformFacialFeaturePosition(xPosition: CGFloat, yPosition: CGFloat,
                                                 videoRect: CGRect, previewRect: CGRect, isMirrored: Bool) -> CGRect {
         
@@ -307,40 +223,6 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         
         return featureRect
     }
-    
-    private func addFaceSquareToPreview(xPosition: CGFloat, yPosition: CGFloat, cleanAperture: CGRect) {
-        let squareView = getSquareFeatureView()
-        let isMirrored = preview!.contentsAreFlipped()
-        let previewBox = preview!.frame
-        
-        previewView!.addSubview(squareView)
-        
-        var boxFrame = transformFacialFeaturePosition(xPosition: xPosition, yPosition: yPosition,
-                                                      videoRect: cleanAperture, previewRect: previewBox, isMirrored: isMirrored)
-        
-        boxFrame.origin.x -= 37
-        boxFrame.origin.y -= 37
-        
-        squareView.frame = boxFrame
-    }
-    
-    private func addEyeViewToPreview(xPosition: CGFloat, yPosition: CGFloat, cleanAperture: CGRect) {
-        let eyeView = getHeartFeatureView()
-        let isMirrored = preview!.contentsAreFlipped()
-        let previewBox = preview!.frame
-        
-        previewView!.addSubview(eyeView)
-        
-        var eyeFrame = transformFacialFeaturePosition(xPosition: xPosition, yPosition: yPosition,
-                                                      videoRect: cleanAperture, previewRect: previewBox, isMirrored: isMirrored)
-        
-        eyeFrame.origin.x -= 37
-        eyeFrame.origin.y -= 37
-        
-        eyeView.frame = eyeFrame
-    }
-    
-    
     
     class FaceDetector {
         var detector: CIDetector?
