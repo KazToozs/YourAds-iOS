@@ -22,7 +22,11 @@ public class YourAdsHelper {
     
     public init() {
         phoneId = ASIdentifierManager.shared().advertisingIdentifier.uuidString.lowercased()
+        
+//        timeZone = TimeZone.current.localizedName(for: .shortStandard, locale: .current)!
         timeZone = TimeZone.current.abbreviation()!
+        print("TIMEZONE")
+        print(timeZone)
         if (phoneId == "00000000-0000-0000-0000-000000000000")
         {
             phoneId = NSUUID().uuidString.lowercased()
@@ -58,20 +62,23 @@ public class YourAdsHelper {
 //    }
     
         public func sendStats(skipped: Bool, skippedTime: Int64,
-                              videoId: Int64, phoneId: String, modelName: String, attention: [Attention]) {
+                              videoId: Int64, phoneId: String, timeZone: String, modelName: String, attention: [Attention]) {
             let data = VideoRecordStats(skipped: skipped, skippedTime: skippedTime,
                                         videoId: videoId, phoneId: phoneId,
-                                        timeZone: timeZone, modelName: modelName, attention: attention)
+                                        timeZone: timeZone, modelName: modelName, attentions: attention)
     
             //        let headers = ["PhoneIdentifiers" : phoneId, "type" : "iOS"]
             //        var jsonData: [String : Any]?
             //        jsonData = dataToJson(data: data)
+            
     
             let urlString = serverAddress + "/api/video/results"
             let jsonEncoder = JSONEncoder()
             let url = URL(string: urlString)!
             var jsonData: Data?
-            do { jsonData = try jsonEncoder.encode(data) }
+            do {
+                jsonData = try jsonEncoder.encode(data)
+            }
             catch { }
             var request = URLRequest(url: url)
     
@@ -89,13 +96,13 @@ public class YourAdsHelper {
             
     }
     
-    public func attentionToJson(attention: [Attention]) -> [Any] {
+    public func attentionToJson(attentions: [Attention]) -> [Any] {
         var jsonAttArray: [Any] = []
         
-        for att in attention {
+        for att in attentions {
             let jsonAttention: [String : Any] = [
-                "nbPerson" : att.nbPerson,
-                "timestamp" : att.timestamp
+                "attention" : att.attention,
+                "timeStamp" : att.timeStamp
             ]
             jsonAttArray.append(jsonAttention)
         }
@@ -109,7 +116,7 @@ public class YourAdsHelper {
             "skippedTime" : data.skippedTime,
             "videoId" : data.videoId,
             "phoneId" : data.phoneId,
-            "attention" : attentionToJson(attention: data.attention)
+            "attentions" : attentionToJson(attentions: data.attentions)
         ]
         return jsonData
     }
@@ -163,11 +170,11 @@ public struct VideoRecordStats : Codable {
     public var phoneId: String
     public var timeZone: String
     public var modelName: String
-    public var attention: [Attention]
+    public var attentions: [Attention]
 }
 public struct Attention : Codable {
-    public var nbPerson: Int
-    public var timestamp: Double
+    public var attention: Int
+    public var timeStamp: Int64
 }
 
 public extension UIDevice {

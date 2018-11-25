@@ -33,6 +33,7 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     
     var faceFeatureCount = 0
     
+    
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
         case InputDeviceNotAvailable
@@ -148,14 +149,16 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         let features = getFacialFeaturesFromImage(image: image)
 
         if (features.isEmpty) {
-            isWatching = false
-            if (videoToMonitor?.isPlaying == true) {
+            if (faceFeatureCount > 0) {
 //                videoToMonitor?.handlePause()
-                let currentTime = videoToMonitor?.player?.currentItem?.currentTime()
+                let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
                 self.nbPauses += 1
                 faceFeatureCount = 0
-                let changedAttention = Attention(nbPerson: 0, timestamp: (currentTime?.seconds)!)
+                print("--- changed to no faces ---")
+                print("0")
+                let changedAttention = Attention(attention: 0, timeStamp: Int64(currentTime))
                 attention.append(changedAttention)
+                isWatching = false
             }
         }
         else {
@@ -168,13 +171,17 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
             isWatching = true
             if (videoToMonitor?.isPlaying == false) {
                 videoToMonitor?.handlePause()
-                let currentTime = videoToMonitor?.player?.currentItem?.currentTime()
-                let changedAttention = Attention(nbPerson: currentFaceFeatureCount, timestamp: (currentTime?.seconds)!)
+                let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
+                let changedAttention = Attention(attention: currentFaceFeatureCount, timeStamp: Int64(currentTime))
+                print("--- More faces (start) ---")
+                print(currentFaceFeatureCount)
                 attention.append(changedAttention)
             }
-            else if (currentFaceFeatureCount > faceFeatureCount) {
-                let currentTime = videoToMonitor?.player?.currentItem?.currentTime()
-                let changedAttention = Attention(nbPerson: currentFaceFeatureCount, timestamp: (currentTime?.seconds)!)
+            else if (currentFaceFeatureCount != faceFeatureCount) {
+                let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
+                let changedAttention = Attention(attention: currentFaceFeatureCount, timeStamp: Int64(currentTime))
+                print("--- changed number of faces ---")
+                print(currentFaceFeatureCount)
                 attention.append(changedAttention)
             }
             faceFeatureCount = currentFaceFeatureCount

@@ -84,13 +84,15 @@ public class YourAdsController: UIViewController {
         let skipped = true
         let videoId = advertId!
         let videoItem = videoPlayerView.player?.currentItem
-        let timeSkipped = Int64((videoItem?.currentTime().seconds)!)
+        let timeSkipped = Int64((videoItem?.currentTime().seconds)! * 1000)
         let phoneId = yourAdsHelper!.phoneId
         
         let attention = cameraRecorder!.attention
         let modelName = yourAdsHelper?.modelName
+        let timeZone = yourAdsHelper!.timeZone
+
         
-        yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, modelName: modelName!, attention: attention)
+        yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, timeZone: timeZone, modelName: modelName!, attention: attention)
         returnToPreviousStoryboard()
     }
     

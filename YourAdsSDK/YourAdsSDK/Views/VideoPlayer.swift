@@ -56,9 +56,10 @@ public class VideoPlayer: UIView {
                 let phoneId = controller.yourAdsHelper!.phoneId
                 let modelName = controller.yourAdsHelper!.modelName
                 let attention = controller.cameraRecorder!.attention
+                let timeZone = controller.yourAdsHelper!.timeZone
 //                var videoItem = self.player?.currentItem
 //                var timeSkipped = videoItem?.currentTime()
-                controller.yourAdsHelper!.sendStats(skipped: skipped, skippedTime: 0, videoId: videoId, phoneId: phoneId, modelName: modelName, attention: attention)
+                controller.yourAdsHelper!.sendStats(skipped: skipped, skippedTime: 0, videoId: videoId, phoneId: phoneId, timeZone: timeZone, modelName: modelName, attention: attention)
                 
                 controller.returnToPreviousStoryboard()
             }
