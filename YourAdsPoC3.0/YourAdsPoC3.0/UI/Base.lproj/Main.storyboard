@@ -42,7 +42,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Campagnes" id="tIO-EC-Vk9">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="6r1-Nk-f3p">
+                        <barButtonItem key="rightBarButtonItem" id="6r1-Nk-f3p">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2KP-Fk-AcH">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

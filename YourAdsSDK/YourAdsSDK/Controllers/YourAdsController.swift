@@ -82,19 +82,15 @@ public class YourAdsController: UIViewController {
 
     @objc func backButtonAction() {
         let skipped = true
-        let nbPauses = cameraRecorder?.nbPauses
         let videoId = advertId!
         let videoItem = videoPlayerView.player?.currentItem
         let timeSkipped = Int64((videoItem?.currentTime().seconds)!)
         let phoneId = yourAdsHelper!.phoneId
         
-        var attention = cameraRecorder!.attention
-        var currentDateTime: Date?
-        let maxFaces = cameraRecorder?.maxFaces
+        let attention = cameraRecorder!.attention
         let modelName = yourAdsHelper?.modelName
-        let timeZone = yourAdsHelper?.timeZone
         
-        yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, timeZone: timeZone!, modelName: modelName!, attention: attention)
+        yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, modelName: modelName!, attention: attention)
         returnToPreviousStoryboard()
     }
     

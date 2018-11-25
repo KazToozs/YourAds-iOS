@@ -58,8 +58,7 @@ public class YourAdsHelper {
 //    }
     
         public func sendStats(skipped: Bool, skippedTime: Int64,
-                              videoId: Int64, phoneId: String,
-                              timeZone: String, modelName: String, attention: [Attention]) {
+                              videoId: Int64, phoneId: String, modelName: String, attention: [Attention]) {
             let data = VideoRecordStats(skipped: skipped, skippedTime: skippedTime,
                                         videoId: videoId, phoneId: phoneId,
                                         timeZone: timeZone, modelName: modelName, attention: attention)

@@ -52,15 +52,13 @@ public class VideoPlayer: UIView {
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem, queue: nil, using: { (_) in
             DispatchQueue.main.async {
                 let skipped = false
-                let nbPauses = controller.cameraRecorder!.nbPauses
                 let videoId = controller.advertId!
                 let phoneId = controller.yourAdsHelper!.phoneId
                 let modelName = controller.yourAdsHelper!.modelName
                 let attention = controller.cameraRecorder!.attention
-                let timeZone = controller.yourAdsHelper!.timeZone
 //                var videoItem = self.player?.currentItem
 //                var timeSkipped = videoItem?.currentTime()
-                controller.yourAdsHelper!.sendStats(skipped: skipped, skippedTime: 0, videoId: videoId, phoneId: phoneId, timeZone: timeZone, modelName: modelName, attention: attention)
+                controller.yourAdsHelper!.sendStats(skipped: skipped, skippedTime: 0, videoId: videoId, phoneId: phoneId, modelName: modelName, attention: attention)
                 
                 controller.returnToPreviousStoryboard()
             }
