@@ -92,6 +92,7 @@ public class YourAdsController: UIViewController {
         let timeZone = yourAdsHelper!.timeZone
 
         
+        
         yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, timeZone: timeZone, modelName: modelName!, attention: attention)
         returnToPreviousStoryboard()
     }

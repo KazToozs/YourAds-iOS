@@ -63,10 +63,13 @@ public class YourAdsHelper {
     
         public func sendStats(skipped: Bool, skippedTime: Int64,
                               videoId: Int64, phoneId: String, timeZone: String, modelName: String, attention: [Attention]) {
-            let data = VideoRecordStats(skipped: skipped, skippedTime: skippedTime,
-                                        videoId: videoId, phoneId: phoneId,
-                                        timeZone: timeZone, modelName: modelName, attentions: attention)
-    
+            
+            print("--- SENDING DATA ---")
+            for att in attention {
+                print("faces: " + String(att.attention))
+                print("timestamp: " + String(att.timeStamp))
+            }
+            
             var attentionsCpy = attention
             //        let headers = ["PhoneIdentifiers" : phoneId, "type" : "iOS"]
             //        var jsonData: [String : Any]?
@@ -76,6 +79,9 @@ public class YourAdsHelper {
                 attentionsCpy.append(skippedAttention)
             }
             
+            let data = VideoRecordStats(skipped: skipped, skippedTime: skippedTime,
+                                        videoId: videoId, phoneId: phoneId,
+                                        timeZone: timeZone, modelName: modelName, attentions: attentionsCpy)
     
             let urlString = serverAddress + "/api/video/results"
             let jsonEncoder = JSONEncoder()
@@ -93,11 +99,9 @@ public class YourAdsHelper {
             request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
             request.httpBody = jsonData
     
-            print("----- BEFORE SEND ------")
             Alamofire.request(request).responseString { (response) in
                 print(response)
             }
-            print("----- AFTER SEND ------")
             
     }
     

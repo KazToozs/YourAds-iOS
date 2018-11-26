@@ -32,7 +32,9 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     var attention: [Attention] = []
     
     var faceFeatureCount = 0
-    var previousFaceChangeTime = 0.0
+    var previousFaceCount = 0
+    var previousFaceSend = 0
+    var changeTime = 0.0
     
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
@@ -147,55 +149,49 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let image = getImageFromBuffer(buffer: sampleBuffer)
         let features = getFacialFeaturesFromImage(image: image)
-
-        if (features.isEmpty) {
-            if (faceFeatureCount > 0) {
-//                videoToMonitor?.handlePause()
-                let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
-//                self.nbPauses += 1
-                
-                if (currentTime > (previousFaceChangeTime + 250)) {
-                    print("--- changed to no faces ---")
-                    print("0")
-                    faceFeatureCount = 0
-                    let changedAttention = Attention(attention: 0, timeStamp: Int64(currentTime))
+        
+        // get current faces for a tick
+        var currentFaceCount = 0
+        let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
+        for feature in features {
+            if ((feature as? CIFaceFeature) != nil) {
+                currentFaceCount += 1
+            }
+        }
+        // check if the faces has changed between ticks
+        if (currentFaceCount != previousFaceCount) {
+            // set a timer to see if the face change is significant
+            print("--- face change? ---")
+            changeTime = currentTime
+            if (currentTime == 0) {
+                if (videoToMonitor?.isPlaying == false) {
+                    videoToMonitor?.handlePause()
+                    let changedAttention = Attention(attention: currentFaceCount, timeStamp: Int64(currentTime))
                     attention.append(changedAttention)
-                    isWatching = false
-                    previousFaceChangeTime = currentTime
+                    previousFaceSend = currentFaceCount
+                    changeTime = -1
                 }
             }
         }
         else {
-            var currentFaceFeatureCount = 0
-            for feature in features {
-                if ((feature as? CIFaceFeature) != nil) {
-                    currentFaceFeatureCount += 1
-                }
-            }
-            isWatching = true
-            if (videoToMonitor?.isPlaying == false) {
-                videoToMonitor?.handlePause()
-                let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
-                let changedAttention = Attention(attention: currentFaceFeatureCount, timeStamp: Int64(currentTime))
-                print("--- More faces (start) ---")
-                print(currentFaceFeatureCount)
-                attention.append(changedAttention)
-                faceFeatureCount = currentFaceFeatureCount
-            }
-            else if (currentFaceFeatureCount != faceFeatureCount) {
-                let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
+            // if the number of faces has not changed between ticks
+            if ((changeTime != -1) && (currentTime > (changeTime + 250))) {
                 
-                if (currentTime > (previousFaceChangeTime + 250)) {
-                    let changedAttention = Attention(attention: currentFaceFeatureCount, timeStamp: Int64(currentTime))
-                    print("--- changed number of faces ---")
-                    print(currentFaceFeatureCount)
+                // set new attention if the timer has gone over set changeTime to 0
+                if (currentFaceCount != previousFaceSend) {
+                    print("--- face change good ---")
+
+                    let changedAttention = Attention(attention: currentFaceCount, timeStamp: Int64(currentTime))
                     attention.append(changedAttention)
-                    faceFeatureCount = currentFaceFeatureCount
-                    previousFaceChangeTime = currentTime
+                    previousFaceSend = currentFaceCount
+                    changeTime = -1
                 }
             }
         }
+        previousFaceCount = currentFaceCount
+        
     }
+    
     
     public func getIsWatching() -> Bool {
         return isWatching
