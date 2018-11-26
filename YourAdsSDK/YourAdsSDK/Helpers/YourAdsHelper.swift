@@ -67,9 +67,14 @@ public class YourAdsHelper {
                                         videoId: videoId, phoneId: phoneId,
                                         timeZone: timeZone, modelName: modelName, attentions: attention)
     
+            var attentionsCpy = attention
             //        let headers = ["PhoneIdentifiers" : phoneId, "type" : "iOS"]
             //        var jsonData: [String : Any]?
             //        jsonData = dataToJson(data: data)
+            if (skippedTime != 0) {
+                let skippedAttention = Attention(attention: 0, timeStamp: skippedTime)
+                attentionsCpy.append(skippedAttention)
+            }
             
     
             let urlString = serverAddress + "/api/video/results"

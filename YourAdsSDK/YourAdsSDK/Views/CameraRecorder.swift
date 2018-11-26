@@ -32,7 +32,7 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
     var attention: [Attention] = []
     
     var faceFeatureCount = 0
-    
+    var previousFaceChangeTime = 0.0
     
     enum VideoCaptureError: Error {
         case SessionPresetNotAvailable
@@ -152,13 +152,17 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
             if (faceFeatureCount > 0) {
 //                videoToMonitor?.handlePause()
                 let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
-                self.nbPauses += 1
-                faceFeatureCount = 0
-                print("--- changed to no faces ---")
-                print("0")
-                let changedAttention = Attention(attention: 0, timeStamp: Int64(currentTime))
-                attention.append(changedAttention)
-                isWatching = false
+//                self.nbPauses += 1
+                
+                if (currentTime > (previousFaceChangeTime + 250)) {
+                    print("--- changed to no faces ---")
+                    print("0")
+                    faceFeatureCount = 0
+                    let changedAttention = Attention(attention: 0, timeStamp: Int64(currentTime))
+                    attention.append(changedAttention)
+                    isWatching = false
+                    previousFaceChangeTime = currentTime
+                }
             }
         }
         else {
@@ -176,15 +180,20 @@ public class CameraRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
                 print("--- More faces (start) ---")
                 print(currentFaceFeatureCount)
                 attention.append(changedAttention)
+                faceFeatureCount = currentFaceFeatureCount
             }
             else if (currentFaceFeatureCount != faceFeatureCount) {
                 let currentTime = (videoToMonitor?.player?.currentItem?.currentTime().seconds)! * 1000
-                let changedAttention = Attention(attention: currentFaceFeatureCount, timeStamp: Int64(currentTime))
-                print("--- changed number of faces ---")
-                print(currentFaceFeatureCount)
-                attention.append(changedAttention)
+                
+                if (currentTime > (previousFaceChangeTime + 250)) {
+                    let changedAttention = Attention(attention: currentFaceFeatureCount, timeStamp: Int64(currentTime))
+                    print("--- changed number of faces ---")
+                    print(currentFaceFeatureCount)
+                    attention.append(changedAttention)
+                    faceFeatureCount = currentFaceFeatureCount
+                    previousFaceChangeTime = currentTime
+                }
             }
-            faceFeatureCount = currentFaceFeatureCount
         }
     }
     

@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZZ-U1-Qp9" customClass="VideoPlayer" customModule="YourAdsSDK">
+                            <view autoresizesSubviews="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZZ-U1-Qp9" customClass="VideoPlayer" customModule="YourAdsSDK">
                                 <rect key="frame" x="0.0" y="237" width="375" height="192"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,7 +30,7 @@
                                 <state key="normal" title="Back"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.97948423799999995" green="1" blue="0.28516566259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="osD-CS-PDe" firstAttribute="top" secondItem="n8a-v1-aZ9" secondAttribute="bottom" id="H1S-l8-6sO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="osD-CS-PDe" secondAttribute="trailing" constant="6" id="mnx-aJ-kVX"/>
