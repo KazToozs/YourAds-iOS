@@ -66,20 +66,11 @@ public class VideoPlayer: UIView {
         })
     }
     
-    public func playVideo() {
-        //        let videoURL: NSURL = Bundle.main.url(forResource: "SampleVideo_1280x720_1mb", withExtension: "mp4")! as NSURL
-        
-//        let videoUrl = NSURL(string: videoHelper.serverAddress + "/api/video/file/"  + videoHelper.videoId! + "/" + videoHelper.videoFilename!);
-        
-        //let escapedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)
-        
-        
+    public func playVideo() {        
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.bounds
+        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspect;
         self.layer.addSublayer(playerLayer)
-//        player?.play()
-        // reset to start at end of video
-        //player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
     }
     
     // ignoring an error

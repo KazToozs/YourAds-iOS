@@ -18,26 +18,15 @@ public class YourAdsController: UIViewController {
     public var previousStoryboardName: String?
     public var previousControllerId: String?
     
-    override public func loadView() {
-        super.loadView()
-        
-//                if (advertId == nil || advertisementFilename == nil) {
-//            yourAdsHelper?.loadRandomVideo(completion: { (videoId, videoFilename) in
-//                if (videoId != nil && videoFilename != nil) {
-//                    self.advertisementFilename = videoFilename
-//                    self.advertId = Int64(videoId!)
-//                    self.launchYourAdsAdvertisement()
-//                }
-//                else {
-//                    print("Random video load returns a nil value")
-//                }
-//            })
-//        }
-//                else {
-//                    self.launchYourAdsAdvertisement()
-//        }
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
     }
     
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
@@ -54,7 +43,6 @@ public class YourAdsController: UIViewController {
                 }
                 else {
                     print("Random video load returns a nil value")
-
                 }
             })
         }
@@ -92,9 +80,12 @@ public class YourAdsController: UIViewController {
         let timeZone = yourAdsHelper!.timeZone
 
         
-        
         yourAdsHelper?.sendStats(skipped: skipped, skippedTime: timeSkipped, videoId: videoId, phoneId: phoneId, timeZone: timeZone, modelName: modelName!, attention: attention)
         returnToPreviousStoryboard()
+    }
+    
+    override public var prefersStatusBarHidden: Bool {
+        return true
     }
     
     override public func didReceiveMemoryWarning() {
@@ -102,14 +93,7 @@ public class YourAdsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    public func returnToPreviousStoryboard() {
-//        let storyboard = UIStoryboard(name: self.previousStoryboardName!, bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: self.previousControllerId!) as! UICollectionViewController
-//        self.present(vc, animated: true, completion: nil)
-//
-//        self.navigationController?
-//            .popViewController(animated: true)
-        
+    public func returnToPreviousStoryboard() {       
         self.dismiss(animated: true, completion: nil)
     }
       

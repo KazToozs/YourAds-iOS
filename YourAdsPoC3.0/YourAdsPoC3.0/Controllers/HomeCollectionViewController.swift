@@ -58,15 +58,12 @@ class HomeCollectionViewController: UICollectionViewController {
                 }
                 else if (segue.identifier == "segueButton") {
                     destinationViewController.yourAdsHelper = yourAdsHelper
-    //                destinationViewController.advertisementFilename = "temp"
-    //                destinationViewController.advertId = 9
                     destinationViewController.previousStoryboardName = "Main"
                     destinationViewController.previousControllerId = "HomeController"
                 }
             }
 //        }
     }
-    
     
     // ----- COLLECTION VIEW METHODS -----
 
